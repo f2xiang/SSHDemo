@@ -47,4 +47,17 @@
 	  <aop:config>
 	      <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.tjrac.service.*.*(..))"/>
 	  </aop:config>
+	  
+	  
+	  <!-- 6、配置Action 
+	                        这是一种可行的方法，也有另外一种方法，struts.xml配置文件的class不引用这个id
+	                        因为Action当中的service方法会自动的注入，只要确保Action中的setXxx和spring中的is="xxx"相一致  
+	  -->
+	  <!--  
+	  <bean id="userAction" class="com.tjrac.web.UserAction">
+	      <property name="userService" ref="userService"></property>
+	  </bean>
+	  -->
+	  
+	  
 </beans>

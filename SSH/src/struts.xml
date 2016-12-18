@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.devMode" value="true" />
+     
+    <package name="user" namespace="/" extends="struts-default">
+        <!-- 这里的class 可以从spring的配置文件中提取  相当于getBean() -->
+        <action name="userAction_*" class="com.tjrac.web.UserAction" method="{1}">
+            <result name="success">/success.jsp</result>
+        </action>
+    </package>
+
+
+	
+</struts>

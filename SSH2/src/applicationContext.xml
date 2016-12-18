@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context.xsd
+						http://www.springframework.org/schema/aop
+						http://www.springframework.org/schema/aop/spring-aop.xsd
+						http://www.springframework.org/schema/tx 
+						http://www.springframework.org/schema/tx/spring-tx.xsd">
+   <!-- 1、加载jdbc配置文件-->
+    <context:property-placeholder location="classpath:jdbc.properties"/>    
+   
+   <!-- 2、配置数据源 -->
+   <bean id="c3p0" class="com.mchange.v2.c3p0.ComboPooledDataSource">
+       <property name="user" value="${user}"></property>
+       <property name="password" value="${password}"></property>
+       <property name="jdbcUrl" value="${url}"></property>
+       <property name="driverClass" value="${driver}"></property>
+   </bean>
+   
+   <!-- 3、配置hibernate的配置文件 加载sessionFactory  3个配置    1、数据源  2、其他配置  3、映射文件 -->
+    <bean id="sessionFactory" class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+        <property name="dataSource" ref="c3p0"></property>
+        
+        <property name="hibernateProperties">
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLDialect</prop>
+                <prop key="show_sql">true</prop>
+                <prop key="format_sql">true</prop>
+                <prop key="hbm2ddl.auto">update</prop>
+            </props>
+        </property>
+        
+        <property name="mappingLocations" value="classpath:com/tjrac/beans/User.hbm.xml"></property>
+    </bean>
+   
+   <!-- 4、dao层 -->
+     <bean id="userDao" class="com.tjrac.dao.UserDaoImpl">
+        <property name="sessionFactory" ref="sessionFactory"></property>
+     </bean>
+   
+   
+   <!-- 5、service层 -->
+      <bean id="userService" class="com.tjrac.service.UserServiceImpl">
+         <property name="userDao" ref="userDao"></property>
+      </bean>
+   
+   <!-- 6 AOP -->
+      <bean id="txManager" class="org.springframework.orm.hibernate3.HibernateTransactionManager">
+	      <property name="sessionFactory" ref="sessionFactory"></property>
+	  </bean>
+	  
+	  <tx:advice id="txAdvice" transaction-manager="txManager">
+	      <tx:attributes>
+	          <tx:method name="saveUser"/>
+	      </tx:attributes>
+	  </tx:advice>
+	  
+	  <aop:config>
+	      <aop:advisor advice-ref="txAdvice" pointcut="execution(* com.tjrac.service.*.*(..))"/>
+	  </aop:config>
+   
+</beans>
