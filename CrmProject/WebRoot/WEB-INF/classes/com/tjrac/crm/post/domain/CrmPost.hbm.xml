@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC 
+    "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+    "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+    
+    <hibernate-mapping>
+         <class name="com.tjrac.crm.post.domain.CrmPost" table="crm_post">
+              <id name="postId">
+                  <generator class="uuid"></generator>
+              </id>
+              
+              <property name="postName"></property>
+              
+              <!-- 职位 对 部门    多 对 【一】  -->
+              <many-to-one name="department" class="com.tjrac.crm.department.domain.CrmDepartment" column="depId"></many-to-one>
+              
+              
+              <!-- //职务  对  员工  一 对 【多】 -->
+              <set name="staffSet">
+                   <key column="postId"></key>
+                   <one-to-many class="com.tjrac.crm.staff.domain.CrmStaff"/>
+              </set>
+         </class>
+    </hibernate-mapping>
