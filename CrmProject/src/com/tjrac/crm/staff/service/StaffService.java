@@ -1,5 +1,7 @@
 package com.tjrac.crm.staff.service;
 
+import java.util.List;
+
 import com.tjrac.crm.staff.domain.CrmStaff;
 
 /**
@@ -14,4 +16,14 @@ public interface StaffService {
 	 * @return 员工
 	 */
 	public CrmStaff login(CrmStaff crmStaff);
+	/**
+	 * 查询所有的员工
+	 * @return
+	 */
+	public List<CrmStaff> findAllStaff();
+	
+	public CrmStaff findById(String staffId);
+	
+	
+	public void addStaff(CrmStaff crmStaff);
 }
