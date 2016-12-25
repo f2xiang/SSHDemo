@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+	
+	<struts>
+	    <constant name="struts.devMode" value="true" />
+	    <!-- 员工配置文件 -->
+	    <package name="post" namespace="/" extends="common">
+	        <action name="postAction_*" class="com.tjrac.crm.post.web.action.PostAction" 
+	                method="{1}">  </action>
+	       
+	    </package>
+	</struts>

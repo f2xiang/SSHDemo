@@ -43,6 +43,7 @@
 
     <!-- 加载 其他的配置文件 -->
     <include file="struts/struts-staff.xml"></include>
-
+    <include file="struts/struts-post.xml"></include>
+    
 	
 </struts>
