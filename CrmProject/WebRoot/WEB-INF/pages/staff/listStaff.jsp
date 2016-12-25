@@ -94,10 +94,6 @@
 	    <td align="center"><s:property value="post.department.depName"/>  </td>
 	    <td align="center"><s:property value="post.postName"/>  </td>
 	  	<td width="7%" align="center">
-	  		<!--  
-	  		<a href="${pageContext.request.contextPath}/pages/staff/editStaff.jsp">
-	  			<img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img" />
-	  		</a>	-->
 	  		<s:a namespace="/" action="staffAction_editUI">
 	  		    <s:param name="staffId" value="staffId"></s:param>
 	  			<img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img" />

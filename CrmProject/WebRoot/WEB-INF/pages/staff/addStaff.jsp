@@ -58,14 +58,6 @@
 	    	 listKey="depId" listValue="depName"
 	    	 headerKey="" headerValue="----请--选--择----">
 	    	</s:select>
-	    	
-	    	<!--  
-	    	<select name="crmPost.crmDepartment.depId"onchange="changePost(this)">
-			    <option value="">----请--选--择----</option>
-			    <option value="2c9091c14c78e58b014c78e67de10001">java学院</option>
-			    <option value="2c9091c14c78e58b014c78e68ded0002">咨询部</option>
-			</select>-->
-
 	    </td>
 	    <td width="8%">职务：</td>
 	    <td width="62%">
@@ -73,10 +65,6 @@
 			    	 listKey="postId" listValue="postName" id="postSelectId"
 			    	 headerKey="" headerValue="----请--选--择----">
 	    	</s:select>
-	    	<!--  
-	    	<select id="postSelectId" name="crmPost.postId">
-	    		<option>----请--选--择----</option>
-	    	</select>-->
 	    </td>
 	  </tr>
 	   <tr>

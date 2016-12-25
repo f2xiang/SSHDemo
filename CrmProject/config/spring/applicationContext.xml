@@ -67,5 +67,7 @@
     <import resource="applicationContext-department.xml"/> 
     <!-- 导入职务的配置 -->
     <import resource="applicationContext-post.xml"/> 
+    <!-- 导入课程类别的配置 -->
+    <import resource="applicationContext-courseType.xml"/> 
     
 </beans>
