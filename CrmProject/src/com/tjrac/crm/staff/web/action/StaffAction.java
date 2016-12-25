@@ -9,6 +9,7 @@ import com.tjrac.crm.department.domain.CrmDepartment;
 import com.tjrac.crm.department.service.DepartmentService;
 import com.tjrac.crm.staff.domain.CrmStaff;
 import com.tjrac.crm.staff.service.StaffService;
+import com.tjrac.crm.utils.MyMd5Util;
 
 public class StaffAction extends ActionSupport implements ModelDriven<CrmStaff>{
 
@@ -80,8 +81,36 @@ public class StaffAction extends ActionSupport implements ModelDriven<CrmStaff>{
 		return "editUI";
 	}
 	
+	/**
+	 * 员工的编辑更新
+	 * @return
+	 */
+	public String edit(){
+		staffService.updateStaff(crmStaff);
+		return "edit";
+	}
+	
+	/**
+	 * 添加员工的UI界面 需要显示可选择的部门  以及 响应的职务 所以需要用到dept的service
+	 * @return
+	 */
+	public String addUI(){
+		//添加员工的时候 要先显示有什么部门 以及 这个部门下面有什么 职务
+		List<CrmDepartment> departmentList = departmentService.findAll();
+		ActionContext.getContext().getValueStack().set("departmentList", departmentList);
+		
+		return "addUI";
+	}
+	
+	/**
+	 * 添加员工
+	 * @return
+	 */
 	public String add(){
-		//staffService.addStaff(crmStaff); TODO 添加员工
+		//要把密码加密  再 添加 
+		String md5Pwd = MyMd5Util.getMD5Value(crmStaff.getLoginPwd()); 
+		crmStaff.setLoginPwd(md5Pwd);
+		staffService.addStaff(crmStaff); 
 		return "add";
 	}
 }

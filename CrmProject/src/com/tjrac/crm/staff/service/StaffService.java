@@ -21,9 +21,22 @@ public interface StaffService {
 	 * @return
 	 */
 	public List<CrmStaff> findAllStaff();
-	
+	/**
+	 * 根据员工的id找到员工
+	 * @param staffId 员工id
+	 * @return 员工
+	 */
 	public CrmStaff findById(String staffId);
 	
-	
+	/**
+	 * 增加一个员工
+	 * @param crmStaff
+	 */
 	public void addStaff(CrmStaff crmStaff);
+	
+	/**
+	 * 修改员工数据
+	 * @param crmStaff 封装要修改数据的员工实体
+	 */
+	public void updateStaff(CrmStaff crmStaff);
 }

@@ -8,18 +8,34 @@
 	    <!-- 员工配置文件 -->
 	    <package name="staff" namespace="/" extends="common">
 	        <action name="staffAction_*" class="com.tjrac.crm.staff.web.action.StaffAction" method="{1}">
+	           
 	            <!-- 登录成功 -->
 	            <result name="success" type="redirectAction">staffAction_home</result>
+	           
 	            <!-- 查询所有 -->
 	            <result name="findAll">/WEB-INF/pages/staff/listStaff.jsp</result>
+	           
 	            <!-- 编辑员工的时候 需要标签回显 -->
 	            <result name="editUI">/WEB-INF/pages/staff/editStaff.jsp</result>
+	           
+	            <!-- 编辑成功 -->
+	            <result name="edit" type="redirectAction">
+	            	<param name="namespace">/</param>
+	            	<param name="actionName">staffAction_findAll</param>
+	            </result>
+	            
+	            <!-- 添加员工的时候 需要 显示部门 和 职务的 选择 -->
+	            <result name="addUI">/WEB-INF/pages/staff/addStaff.jsp</result>
+	            
 	            <!-- 添加员工 -->
-	            <result name="add">/WEB-INF/pages/staff/listStaff.jsp</result>
+	            <result name="add" type="redirectAction">staffAction_findAll</result>
+	       
 	        </action>
+	        
 	        <!-- 返回主页 -->
 	        <action name="staffAction_home" class="com.tjrac.crm.staff.web.action.StaffAction" method="home">
 	            <result name="home">/WEB-INF/pages/frame.jsp</result>
 	        </action>
+	   
 	    </package>
 	</struts>

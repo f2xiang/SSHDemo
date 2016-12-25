@@ -27,7 +27,7 @@
 		<a href="javascript:void(0)" onclick="condition()"><img src="${pageContext.request.contextPath}/images/button/gaojichaxun.gif" /></a>
     	<%--员工注入 --%>
     	 
-	  	<a href="${pageContext.request.contextPath}/uiAction_staff_addStaff.action">
+	  	<a href="${pageContext.request.contextPath}/staffAction_addUI">
 	  		<img src="${pageContext.request.contextPath}/images/button/tianjia.gif" />
 	  	</a>
       

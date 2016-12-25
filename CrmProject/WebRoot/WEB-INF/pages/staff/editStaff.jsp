@@ -35,8 +35,9 @@
 </table>
 
 
-<s:form>
-	
+<s:form namespace="/" action="staffAction_edit">
+	<!-- id  文本隐藏域  因为要修改员工的时候保证id 的存在 又要不能被修改-->
+	<s:hidden name="staffId" value="%{staffId}"></s:hidden>
 	<table width="88%" border="0" class="emp_table" style="width:80%;">
 	 <tr>
 	    <td>登录名：</td>
