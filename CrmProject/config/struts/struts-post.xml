@@ -5,10 +5,14 @@
 	
 	<struts>
 	    <constant name="struts.devMode" value="true" />
-	    <!-- 员工配置文件 -->
+	    <!-- 职务配置文件 -->
 	    <package name="post" namespace="/" extends="common">
 	        <action name="postAction_*" class="com.tjrac.crm.post.web.action.PostAction" 
-	                method="{1}">  </action>
+	                method="{1}">  
+	        	<result name="findAll">/WEB-INF/pages/post/listPost.jsp</result>        
+	        	<result name="editUI">/WEB-INF/pages/post/addOrEditPost.jsp</result>
+	        	<result name="addOrUpdate" type="redirectAction">postAction_findAll</result>
+	        </action>
 	       
 	    </package>
 	</struts>

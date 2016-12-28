@@ -13,5 +13,18 @@ public class DepartmentDaoImpl extends HibernateDaoSupport implements Department
 	public List<CrmDepartment> findAll() {
 		return this.getHibernateTemplate().find("from CrmDepartment");
 	}
+
+	
+	@Override
+	public CrmDepartment findById(String depId) {
+		return this.getHibernateTemplate().get(CrmDepartment.class, depId); 		
+	}
+
+
+	@Override
+	public void addOrEdit(CrmDepartment dept) {
+		this.getHibernateTemplate().saveOrUpdate(dept);
+	}
+
 	
 }

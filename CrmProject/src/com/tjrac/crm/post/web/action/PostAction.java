@@ -6,10 +6,14 @@ import java.util.List;
 import net.sf.json.JSONArray;
 import net.sf.json.JsonConfig;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.ServletActionContext;
 
+import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import com.tjrac.crm.department.domain.CrmDepartment;
+import com.tjrac.crm.department.service.DepartmentService;
 import com.tjrac.crm.post.domain.CrmPost;
 import com.tjrac.crm.post.service.PostService;
 
@@ -29,6 +33,12 @@ public class PostAction extends ActionSupport implements ModelDriven<CrmPost>{
 		this.postService = postService;
 	}
 	
+	private DepartmentService departmentService;
+	
+	public void setDepartmentService(DepartmentService departmentService) {
+		this.departmentService = departmentService;
+	}
+
 	////////////////////////////////
 	/**
 	 * ajax 通过部门 查询所有的职务
@@ -53,5 +63,38 @@ public class PostAction extends ActionSupport implements ModelDriven<CrmPost>{
 		return "none";
 	}
 	
+	/**
+	 * 查询所有的职务 包括职务相对应的部门
+	 * @return
+	 */
+	public String findAll(){
+		List<CrmPost> allPost = this.postService.findAll();
+		ActionContext.getContext().put("allPost", allPost);
+		return "findAll";
+	}
+	
+	
+	public String editUI(){
 
+		//如果职务id不为 空 就是更新  需要数据的回显  
+		
+		List<CrmDepartment> allDepartment =  departmentService.findAll();
+		ActionContext.getContext().getValueStack().set("allDepartment", allDepartment);
+		
+		
+		
+		if(StringUtils.isNotBlank(crmPost.getPostId())){
+			CrmPost findPost = postService.findById(crmPost.getPostId());
+			ActionContext.getContext().put("findPost", findPost);
+		}
+		
+		return "editUI";
+	}
+	
+	
+	public String addOrUpdate(){
+		
+		return "addOrUpdate";
+	}
+	
 }

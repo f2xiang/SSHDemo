@@ -16,7 +16,17 @@ public class DepartmentServiceImpl implements DepartmentService{
 
 	@Override
 	public List<CrmDepartment> findAll() {
-		return departmentDao.findAll();
+		return this.departmentDao.findAll();
+	}
+
+	@Override
+	public CrmDepartment findById(String depId) {
+		return this.departmentDao.findById(depId);
+	}
+
+	@Override
+	public void addOrUpdate(CrmDepartment dept) {
+		this.departmentDao.addOrEdit(dept);
 	}
 	
 	

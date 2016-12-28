@@ -7,4 +7,8 @@ import com.tjrac.crm.post.domain.CrmPost;
 
 public interface PostService {
 	public List<CrmPost> findPostByDept(CrmDepartment dept);
+	
+	public List<CrmPost> findAll();
+	
+	public CrmPost findById(String postId);
 }
