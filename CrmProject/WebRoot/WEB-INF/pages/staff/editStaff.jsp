@@ -95,7 +95,7 @@
    		//2.2 设置回调函数
    		xmlhttp.onreadystatechange = function(){
 			//请求完成 正常响应
-			if(xmlhttp.readyState == 4 &&　xmlhttp.status == 200){
+			if(xmlhttp.readyState == 4 && xmlhttp.status == 200){
 				//1 获得数据 并 展示
 				var textData = xmlhttp.responseText;
 				

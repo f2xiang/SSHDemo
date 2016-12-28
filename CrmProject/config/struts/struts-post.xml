@@ -12,6 +12,7 @@
 	        	<result name="findAll">/WEB-INF/pages/post/listPost.jsp</result>        
 	        	<result name="editUI">/WEB-INF/pages/post/addOrEditPost.jsp</result>
 	        	<result name="addOrUpdate" type="redirectAction">postAction_findAll</result>
+	        	<result name="add" type="redirectAction">postAction_findAll</result>
 	        </action>
 	       
 	    </package>

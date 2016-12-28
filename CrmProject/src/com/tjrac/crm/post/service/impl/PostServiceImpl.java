@@ -30,4 +30,15 @@ public class PostServiceImpl implements PostService{
 		return this.postDao.findById(postId);
 	}
 
+	@Override
+	public void addOrUpdate(CrmPost post) {
+		this.postDao.addOrUpdate(post);
+	}
+
+	@Override
+	public void add(CrmPost post) {
+		this.postDao.add(post);
+	}
+
+	
 }

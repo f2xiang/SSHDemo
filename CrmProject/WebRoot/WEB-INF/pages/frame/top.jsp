@@ -96,12 +96,16 @@
 										<%--是否使用弹出框？ javascript:modifypsw(); 
 										<a href="javascript:void(0)" onclick="javascript:modifypsw();"><font color="ffffff">更改口令</font></a>
 										--%>
-										<a href="${pageContext.request.contextPath}/pages/staff/updPwd.jsp" target="right">
+										<a href="${pageContext.request.contextPath}/staffAction_updPwd" target="right">
 											<font color="ffffff">更改口令</font>
 										</a>
 									</td>
-									<td width="31"><p align="center"><img border="0" src="${pageContext.request.contextPath}/images/login.gif"></td>
-									<td width="55" valign="middle"><a href="${pageContext.request.contextPath}/staff/staffAction_logout" target="_top"><font color="ffffff">重新登录</font></a></td>
+									<td width="31"><p align="center">
+										<img border="0" src="${pageContext.request.contextPath}/images/login.gif">
+									</td>
+									<td width="55" valign="middle">
+										<a href="${pageContext.request.contextPath}/staffAction_logout" target="_top">
+										<font color="ffffff">重新登录</font></a></td>
 								</tr>
 							</table>
 						</div>

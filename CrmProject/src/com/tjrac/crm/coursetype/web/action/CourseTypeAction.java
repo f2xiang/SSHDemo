@@ -10,6 +10,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.tjrac.crm.coursetype.domain.CrmCourseType;
 import com.tjrac.crm.coursetype.service.CourseTypeService;
+import com.tjrac.crm.page.PageBean;
 
 public class CourseTypeAction extends ActionSupport implements ModelDriven<CrmCourseType> {
 
@@ -27,6 +28,22 @@ public class CourseTypeAction extends ActionSupport implements ModelDriven<CrmCo
 		this.courseTypeService = courseTypeService;
 	}
 	
+	
+	//-----------------分页数据-----------------
+	private int pageNum = 1;   //默认当前页 为1
+	
+	public void setPageNum(int pageNum) {
+		this.pageNum = pageNum;
+	}
+	
+	private int pageSize = 1;   //默认每页显示2条数据
+	
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+	
+	//////////////////////////////////////////////
+	
 	/**
 	 * 查询所有
 	 * @return
@@ -38,8 +55,15 @@ public class CourseTypeAction extends ActionSupport implements ModelDriven<CrmCo
 		*/
 		
 		//条件查询
+		/*
 		List<CrmCourseType> allCourseType = courseTypeService.findAllCourseType(courseType);
 		ActionContext.getContext().put("allCourseType", allCourseType);
+		*/
+		
+		//分页 + 条件
+		PageBean<CrmCourseType> pageBean = 
+				courseTypeService.findAll(courseType, pageNum, pageSize);
+		ActionContext.getContext().put("pageBean", pageBean);
 		
 		return "findAll";
 	}

@@ -40,4 +40,6 @@ public class StaffDaoImpl extends HibernateDaoSupport implements StaffDao{
 		this.getHibernateTemplate().save(crmStaff);
 	}
 
+	
+
 }

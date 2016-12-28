@@ -3,6 +3,7 @@ package com.tjrac.crm.coursetype.service;
 import java.util.List;
 
 import com.tjrac.crm.coursetype.domain.CrmCourseType;
+import com.tjrac.crm.page.PageBean;
 
 public interface CourseTypeService {
 	/**
@@ -30,4 +31,13 @@ public interface CourseTypeService {
 	 * @param courseType
 	 */
 	public void addOrEdit(CrmCourseType courseType);
+	
+	/**
+	 * 带条件的分页查询所有
+	 * @param courseType  条件
+	 * @param pageNum   当前页
+	 * @param pageSize   每页显示个数
+	 * @return
+	 */
+	public PageBean<CrmCourseType> findAll(CrmCourseType courseType, int pageNum, int pageSize);
 }

@@ -25,4 +25,14 @@ public class PostDaoImpl extends HibernateDaoSupport implements PostDao{
 		return this.getHibernateTemplate().get(CrmPost.class, postId);
 	}
 
+	@Override
+	public void addOrUpdate(CrmPost post) {
+		this.getHibernateTemplate().saveOrUpdate(post);
+	}
+
+	@Override
+	public void add(CrmPost post) {
+		this.getHibernateTemplate().save(post);
+	}
+
 }

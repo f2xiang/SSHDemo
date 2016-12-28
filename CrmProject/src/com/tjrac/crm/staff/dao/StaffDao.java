@@ -30,7 +30,14 @@ public interface StaffDao {
 	 */
 	public CrmStaff findById(String staffId);
 	
-	
+	/**
+	 * ÃÌº”‘±π§
+	 * @param crmStaff
+	 */
 	public void add(CrmStaff crmStaff);
+	
+
+	
+	
 	
 }

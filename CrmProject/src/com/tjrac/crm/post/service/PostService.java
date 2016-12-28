@@ -11,4 +11,8 @@ public interface PostService {
 	public List<CrmPost> findAll();
 	
 	public CrmPost findById(String postId);
+	
+	public void addOrUpdate(CrmPost post);
+	
+	public void add(CrmPost post);
 }

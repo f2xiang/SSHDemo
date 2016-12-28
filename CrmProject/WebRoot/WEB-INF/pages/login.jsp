@@ -51,7 +51,7 @@ FONT-SIZE: 12px; COLOR: #4b4b4b; LINE-HEIGHT: 18px; TEXT-DECORATION: none
 					</font> 
 					<br/>
 					用户名： <s:textfield name="loginName" cssClass="msg"></s:textfield><br>
-					密&nbsp;&nbsp;码： <s:password name="loginPwd" cssClass="msg" showPassword="true"></s:password><br/>
+					密&nbsp;码： <s:password name="loginPwd" cssClass="msg" showPassword="true"></s:password><br/>
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<s:submit value="登录" cssClass="btn"></s:submit>
 				</s:form>

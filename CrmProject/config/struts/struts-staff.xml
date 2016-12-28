@@ -30,6 +30,11 @@
 	            <!-- 添加员工 -->
 	            <result name="add" type="redirectAction">staffAction_findAll</result>
 	       
+	       		<!-- 注销 返回登录 -->
+	       		<result name="logout">/WEB-INF/pages/login.jsp</result>
+	       		
+	       		<!-- 修改密码 返回登录 -->
+	       		<result name="updPwd">/WEB-INF/pages/login.jsp</result>
 	        </action>
 	        
 	        <!-- 返回主页 -->

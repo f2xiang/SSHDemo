@@ -76,12 +76,16 @@ public class PostAction extends ActionSupport implements ModelDriven<CrmPost>{
 	
 	public String editUI(){
 
-		//如果职务id不为 空 就是更新  需要数据的回显  
+		//如果职务id不为 空 就是更新  需要数据的回显   
 		
+		
+		//1 回显 所有的部门数据
 		List<CrmDepartment> allDepartment =  departmentService.findAll();
 		ActionContext.getContext().getValueStack().set("allDepartment", allDepartment);
 		
-		
+		//2回显所有的职务数据
+		List<CrmPost> allPost = postService.findAll();
+		ActionContext.getContext().getValueStack().set("allPost", allPost);
 		
 		if(StringUtils.isNotBlank(crmPost.getPostId())){
 			CrmPost findPost = postService.findById(crmPost.getPostId());
@@ -93,8 +97,13 @@ public class PostAction extends ActionSupport implements ModelDriven<CrmPost>{
 	
 	
 	public String addOrUpdate(){
-		
+		this.postService.addOrUpdate(crmPost);
 		return "addOrUpdate";
+	}
+	
+	public String add(){
+		this.postService.add(crmPost);
+		return "add";
 	}
 	
 }

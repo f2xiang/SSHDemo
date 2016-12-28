@@ -113,4 +113,22 @@ public class StaffAction extends ActionSupport implements ModelDriven<CrmStaff>{
 		staffService.addStaff(crmStaff); 
 		return "add";
 	}
+	
+	/**
+	 * ×¢Ïú
+	 * @return
+	 */
+	public String logout(){
+		ActionContext.getContext().getSession().remove("loginStaff");
+		return "logout";
+	}
+	
+	/**
+	 * ĞŞ¸ÄÃÜÂë
+	 * @return
+	 */
+	public String updPwd(){
+		
+		return "updPwd";
+	}
 }

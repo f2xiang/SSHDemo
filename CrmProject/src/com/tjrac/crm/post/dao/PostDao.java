@@ -11,4 +11,9 @@ public interface PostDao {
 	public List<CrmPost> findAll();
 	
 	public CrmPost findById(String postId);
+	
+	public void addOrUpdate(CrmPost post);
+	
+	//-------因为 更新 + 添加 出错了 所以加个add测试-----
+	public void add(CrmPost post);
 }
