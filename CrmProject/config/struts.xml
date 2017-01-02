@@ -23,15 +23,23 @@
                  <interceptor-ref name="loginInterceptor">
                       <param name="excludeMethods">login</param>
                  </interceptor-ref>
-                 <interceptor-ref name="defaultStack"></interceptor-ref>
+                 <interceptor-ref name="defaultStack">
+                 	<!-- 设置文件上传时所允许的后缀名   拦截器.属性 = 值 -->
+                 	<param name="fileUpload.allowedExtensions">.jpg,.gif</param>
+                 </interceptor-ref>
            </interceptor-stack>
        </interceptors>
-           <!-- 3、把那个打包过的融合两部分的拦截器栈 声明为默认 -->
-           <default-interceptor-ref name="loginStack"></default-interceptor-ref>
-           <!-- 4、声明全局的结果集 -->
-           <global-results>
-                <result name="login">/WEB-INF/pages/login.jsp</result>
-           </global-results> 
+      
+       <!-- 3、把那个打包过的融合两部分的拦截器栈 声明为默认 -->
+       <default-interceptor-ref name="loginStack"></default-interceptor-ref>
+      
+       <!-- 默认的action 如果找不到action 都会去访问这个action -->
+       <default-action-ref name="staffAction_home" > </default-action-ref>
+      
+       <!-- 4、声明全局的结果集 -->
+       <global-results>
+            <result name="login">/WEB-INF/pages/login.jsp</result>
+       </global-results> 
        
        
        <!-- 所有的ui界面 放到web-inf 目录以后进行重新配置 用action来进行访问 -->    
@@ -46,6 +54,7 @@
     <include file="struts/struts-post.xml"></include>
     <include file="struts/struts-coursetype.xml"></include>
     <include file="struts/struts-dept.xml"></include>
+    <include file="struts/struts-classes.xml"></include>
     
 	
 </struts>

@@ -69,5 +69,7 @@
     <import resource="applicationContext-post.xml"/> 
     <!-- 导入课程类别的配置 -->
     <import resource="applicationContext-courseType.xml"/> 
+    <!-- 导入班级的配置 -->
+    <import resource="applicationContext-classes.xml"/> 
     
 </beans>

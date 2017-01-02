@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+	
+	<struts>
+	    <constant name="struts.devMode" value="true" />
+	    <!-- 班级配置文件 -->
+	    <package name="classes" namespace="/" extends="common">
+	        <action name="classesAction_*" class="com.tjrac.crm.classes.web.action.ClassesAction" method="{1}"> 
+	            <!-- 查询所有 -->
+	            <result name="findAll">/WEB-INF/pages/classesm/listClass.jsp</result> 
+	            <!-- 上传表单页面 -->
+	            <result name="uploadUI">/WEB-INF/pages/classesm/uploadClass.jsp</result>
+	            <!-- 上传成功 -->
+	            <result name="upload" type="redirectAction">classesAction_findAll</result>
+	            <!-- 文件上传不成功 -->
+	            <result name="input">/WEB-INF/pages/error.jsp</result>
+	        </action>
+	    </package>
+	</struts>
