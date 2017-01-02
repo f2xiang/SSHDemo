@@ -24,4 +24,8 @@ public interface DepartmentDao {
 	 * @param dept
 	 */
 	public void addOrEdit(CrmDepartment dept);
+
+	public int findTotalRecord();
+
+	public List<CrmDepartment> findAll(int startIndex, int pageSize);
 }

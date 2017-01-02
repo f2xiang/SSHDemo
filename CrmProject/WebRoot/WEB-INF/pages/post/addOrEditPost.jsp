@@ -36,7 +36,7 @@
 </table>
 
 <s:form namespace="/" action="postAction_addOrUpdate">
-
+	<!-- 点编辑的时候传来id  点添加的时候没有id -->
 	<s:if test="postId != null">
 		<s:hidden name="postId" value="%{postId}"></s:hidden>
 	</s:if>
@@ -48,11 +48,12 @@
 			    listKey="depId" listValue="depName"
 			    headerKey="" headerValue="----请--选--择----">
 			</s:select>
+			<s:property value=""/>
   		</td>
 	    <td>职务：</td>
 	    <td> 
-	      <s:select list="allPost" name="postId"
-	            listKey="postId" listValue="postName" 
+	      <s:select list="allPost" 
+	            	listKey="postId" listValue="postName" 
 	             headerKey="" headerValue="----请--选--择----">
 	      </s:select> 
 	     </td>

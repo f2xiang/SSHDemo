@@ -107,7 +107,7 @@
   <tr>
     <td align="right">
     	<span>第   <s:property value="#pageBean.pageNum"/> / <s:property value="#pageBean.totalPage"/> 页</span>
-        <span>
+     <span>
         <s:if test="#pageBean.pageNum > 1">
         	<a href="javascript:void(0)" onclick="showPage(1)">[首页]</a>&nbsp;&nbsp;
             <a href="javascript:void(0)" onclick="showPage(<s:property value="#pageBean.pageNum - 1"/>)">[上一页]</a>&nbsp;&nbsp;
