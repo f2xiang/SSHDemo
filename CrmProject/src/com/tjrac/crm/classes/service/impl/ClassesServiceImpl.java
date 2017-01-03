@@ -5,6 +5,7 @@ import java.util.List;
 import com.tjrac.crm.classes.dao.ClassesDao;
 import com.tjrac.crm.classes.domain.CrmClasses;
 import com.tjrac.crm.classes.service.ClassesService;
+import com.tjrac.crm.page.PageBean;
 
 public class ClassesServiceImpl implements ClassesService{
 
@@ -31,6 +32,26 @@ public class ClassesServiceImpl implements ClassesService{
 		findClass.setUploadFilename(classes.getUploadFilename());
 		findClass.setUploadPath(classes.getUploadPath());
 		findClass.setUploadTime(classes.getUploadTime());
+	}
+
+	@Override
+	public void addOrUpdate(CrmClasses classes) {
+		this.classesDao.addOrUpdate(classes);
+	}
+
+	@Override
+	public PageBean<CrmClasses> findAll(int pageNum, int pageSize) {
+		//总记录数
+		int totalReocrd = this.classesDao.findTotalRecord();
+		
+		//创建对象
+		PageBean<CrmClasses> pageBean = new PageBean<CrmClasses>(pageNum, pageSize, totalReocrd);
+		
+		//分页数据
+		List<CrmClasses> data = this.classesDao.findAll(pageBean, pageBean.getStartIndex(), pageBean.getPageSize());
+		pageBean.setData(data);
+		
+		return pageBean;
 	}
 	
 	

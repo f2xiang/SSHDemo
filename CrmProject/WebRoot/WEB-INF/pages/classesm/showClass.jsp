@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="/struts-tags" prefix="s" %>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
@@ -36,27 +37,27 @@
 <table width="88%" border="0" class="emp_table" style="width:80%;">
   <tr>
     <td width="10%">班级名称：</td>
-    <td width="20%">1期</td>
+    <td width="20%"><s:property value="name" />  </td>
     <td width="8%">所属类别：</td>
-    <td width="62%">java基础</td>
+    <td width="62%"><s:property value="courseType.courseName" />  </td>
   </tr>
   <tr>
     <td>开课时间：</td>
-    <td>2015-03-10</td>
+    <td><s:property value="beginTime" /> </td>
     <td>结业时间：</td>
-    <td>2015-04-30</td>
+    <td><s:property value="endTime"/> </td>
   </tr>
   <tr>
     <td>学生总数：</td>
-    <td>1 </td>
+    <td><s:property value="totalCount" /> </td>
     <td>升级数：</td>
-    <td>2</td>
+    <td><s:property value="upgradeCount" /> </td>
   </tr>
   <tr>
     <td>转班数：</td>
-    <td>0 </td>
+    <td><s:property value="changeCount" /> </td>
     <td>退费数：</td>
-    <td>2</td>
+    <td><s:property value="runoffCount" /> </td>
   </tr>
   <tr>
     <td>其他说明：</td>
@@ -66,7 +67,7 @@
   </tr>
   <tr>
     <td colspan="4">
-    	<textarea name="remark" cols="60" rows="10" id="remark"></textarea>
+    	<s:textarea name="remark" cols="60" rows="10" id="remark"></s:textarea>
     </td>
   </tr>
   <tr>

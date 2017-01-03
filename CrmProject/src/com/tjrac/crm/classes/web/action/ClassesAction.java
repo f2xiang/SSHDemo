@@ -7,6 +7,7 @@ import java.util.List;
 import java.util.UUID;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.ServletActionContext;
 
 import com.opensymphony.xwork2.ActionContext;
@@ -14,6 +15,10 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.tjrac.crm.classes.domain.CrmClasses;
 import com.tjrac.crm.classes.service.ClassesService;
+import com.tjrac.crm.coursetype.domain.CrmCourseType;
+import com.tjrac.crm.coursetype.service.CourseTypeService;
+import com.tjrac.crm.department.domain.CrmDepartment;
+import com.tjrac.crm.page.PageBean;
 
 public class ClassesAction extends ActionSupport implements ModelDriven<CrmClasses>{
 	
@@ -33,15 +38,39 @@ public class ClassesAction extends ActionSupport implements ModelDriven<CrmClass
 		this.classesService = classesService;
 	}
 	
-	//---------------------------------
+	private CourseTypeService courseTypeService;
 	
+	public void setCourseTypeService(CourseTypeService courseTypeService) {
+		this.courseTypeService = courseTypeService;
+	}
+	
+	//---------------------------------
+	//分页数据
+	private int pageNum = 1;
+	
+	public void setPageNum(int pageNum) {
+		this.pageNum = pageNum;
+	}
+	
+	private int pageSize = 2;
+	
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+	
+	//-----------------------------------
 	/**
 	 * 查询所有
 	 * @return
 	 */
 	public String findAll(){
-		List<CrmClasses> allClasses =  classesService.findAll();
-		ActionContext.getContext().getValueStack().set("allClasses", allClasses);
+//		List<CrmClasses> allClasses =  classesService.findAll();
+//		ActionContext.getContext().getValueStack().set("allClasses", allClasses);
+		
+		//分页
+		PageBean<CrmClasses> pageBean = classesService.findAll(pageNum, pageSize);
+		ActionContext.getContext().put("pageBean", pageBean);
+		
 		return "findAll";
 	}
 	
@@ -100,4 +129,42 @@ public class ClassesAction extends ActionSupport implements ModelDriven<CrmClass
 		
 		return "upload";
 	}
+	
+	
+	/**
+	 * 增加 或者 更新  的UI界面
+	 * @return
+	 */
+	public String editUI(){
+		//如果有id  就是  更新  没有 id 就是增加
+		if(StringUtils.isNotBlank(classes.getClassId())){
+			//有id 编辑 数据回显 
+			CrmClasses findClasses = this.classesService.findById(classes.getClassId());
+			ActionContext.getContext().getValueStack().push(findClasses);
+		}
+		
+		List<CrmCourseType> allCourseType = courseTypeService.findAllCourseType();
+		ActionContext.getContext().getValueStack().set("allCourseType", allCourseType);
+		
+		return "editUI";
+	}
+	
+	
+	public String saveOrUpdate(){
+		this.classesService.addOrUpdate(classes);
+		return "saveOrUpdate";
+	}
+	
+	/**
+	 * 查看某个班级
+	 * @return
+	 */
+	public String showClass(){
+		CrmClasses classes = this.classesService.findById(this.classes.getClassId());
+		ActionContext.getContext().getValueStack().push(classes);
+		return "showClass";
+	}
+	
+	
+	
 }

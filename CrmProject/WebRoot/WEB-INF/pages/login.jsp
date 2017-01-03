@@ -55,11 +55,6 @@ FONT-SIZE: 12px; COLOR: #4b4b4b; LINE-HEIGHT: 18px; TEXT-DECORATION: none
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
 					<s:submit value="登录" cssClass="btn"></s:submit>
 				</s:form>
-				
-				
-				
-				
-				<a href="${pageContext.request.contextPath}/pages/frame.jsp">test</a>
 			</td>
 		</tr>
 	</table>

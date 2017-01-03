@@ -23,10 +23,10 @@
     <td width="20%" align="left">[班级管理]</td>
     <td width="42%"align="center">&nbsp;</td>
     <td width="36%"align="right">
-    	<%--添加班级  /html/classesm/addClass.jsp--%>
-    	<a href="${pageContext.request.contextPath}/pages/classesm/addOrEditClass.jsp">
+    	<%--添加班级 --%>
+    	<s:a namespace="/" action="classesAction_editUI">
     		<img src="${pageContext.request.contextPath}/images/button/tianjia.gif" class="img"/>
-    	</a>
+    	</s:a>
     	<%--高级查询 
         <a href="queryClass.html"><img src="${pageContext.request.contextPath}/images/button/gaojichaxun.gif" class="img"/></a>
     	--%>
@@ -64,8 +64,10 @@
   </tr>
   </thead>
   
+  
+
   <tbody>
-  	<s:iterator value="allClasses" status="vs">
+  	<s:iterator value="#pageBean.data" status="vs">
 	  <tr class="<s:property value="#vs.even? 'tabtd2': 'tabtd1' "/>">
 	    <td align="center"><s:property value="name" /> </td>
 	    <td align="center"><s:property value="courseType.courseName" />  </td>
@@ -76,10 +78,16 @@
 	    <td align="center"><s:property value="upgradeCount"/></td>
 	    <td align="center"><s:property value="changeCount"/></td>
 	    <td align="center">
-	    	<a href="${pageContext.request.contextPath}/pages/classesm/addOrEditClass.jsp"><img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img"/></a>
+	    	<s:a namespace="/" action="classesAction_editUI">
+	    		<s:param name="classId" value="classId"></s:param>
+	    		<img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img"/>
+	    	</s:a>
 	    </td>
 		<td align="center">
-	    	<a href="${pageContext.request.contextPath}/pages/classesm/showClass.jsp"><img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img"/></a>
+			<s:a namespace="/" action="classesAction_showClass">
+	    		<s:param name="classId" value="classId"></s:param>
+				<img src="${pageContext.request.contextPath}/images/button/modify.gif" class="img"/>
+			</s:a>
 		</td>
 		<td align="center" title="上次上传时间：2015-04-02">   
 			<s:a namespace="/" action="classesAction_uploadUI">
@@ -94,19 +102,39 @@
 </table>
 
 
+<s:form namespace="/" action="classesAction_findAll">
+	  <s:hidden id="pageNum" name="pageNum" value="1"></s:hidden>
+</s:form>
+
 <table border="0" cellspacing="0" cellpadding="0" align="center">
   <tr>
     <td align="right">
-    	<span>第1/3页</span>
+    	<span>第     <s:property value="#pageBean.pageNum"/> / <s:property value="#pageBean.totalPage"/>  页</span>
         <span>
-        	<a href="#">[首页]</a>&nbsp;&nbsp;
-            <a href="#">[上一页]</a>&nbsp;&nbsp;
-            <a href="#">[下一页]</a>&nbsp;&nbsp;
-            <a href="#">[尾页]</a>
+        	<s:if test="#pageBean.pageNum > 1">
+				<a href="javascript:void(0)" onclick="showPage(1)">[首页]</a>&nbsp;&nbsp;
+				<a href="javascript:void(0)" onclick="showPage(<s:property value="#pageBean.pageNum - 1"/>)">[上一页]</a>&nbsp;&nbsp;
+			</s:if>  
+			   
+			<s:iterator begin="#pageBean.start" end="#pageBean.end" var="num">
+			   	<a href="javascript:void(0)" onclick="showPage(<s:property value="#num" />)"><s:property value="#num" /></a>&nbsp;&nbsp;
+			</s:iterator>
+			 
+			<s:if test="#pageBean.pageNum < #pageBean.totalPage">
+			    <a href="javascript:void(0)" onclick="showPage(<s:property value="#pageBean.pageNum + 1"/>)">[下一页]</a>&nbsp;&nbsp;
+				<a href="javascript:void(0)" onclick="showPage(<s:property value="#pageBean.totalPage"/>)">[尾页]</a>
+			</s:if>    
         </span>
     </td>
   </tr>
 </table>
-
+<script type="text/javascript">
+	function showPage(num){
+		//1 修改隐藏域的值
+		document.getElementById("pageNum").value = num;
+		//2 提交表单
+		document.forms[1].submit();
+	}
+</script>
 </body>
 </html>

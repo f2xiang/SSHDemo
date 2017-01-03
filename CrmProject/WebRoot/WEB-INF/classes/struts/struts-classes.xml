@@ -16,6 +16,13 @@
 	            <result name="upload" type="redirectAction">classesAction_findAll</result>
 	            <!-- 文件上传不成功 -->
 	            <result name="input">/WEB-INF/pages/error.jsp</result>
+	            
+	            <!-- 添加 或者 更新 的ui界面 -->
+	            <result name="editUI">/WEB-INF/pages/classesm/addOrEditClass.jsp</result>
+	            <!-- 增加 或 更新员工 成功 -->
+	            <result name="saveOrUpdate" type="redirectAction">classesAction_findAll</result>
+	            <!-- 查看班级 -->
+	            <result name="showClass">/WEB-INF/pages/classesm/showClass.jsp</result>
 	        </action>
 	    </package>
 	</struts>
