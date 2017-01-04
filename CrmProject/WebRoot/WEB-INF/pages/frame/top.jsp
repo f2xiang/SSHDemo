@@ -96,7 +96,7 @@
 										<%--是否使用弹出框？ javascript:modifypsw(); 
 										<a href="javascript:void(0)" onclick="javascript:modifypsw();"><font color="ffffff">更改口令</font></a>
 										--%>
-										<a href="${pageContext.request.contextPath}/staffAction_updPwd" target="right">
+										<a href="${pageContext.request.contextPath}/staffAction_updPwdUI" target="right">
 											<font color="ffffff">更改口令</font>
 										</a>
 									</td>

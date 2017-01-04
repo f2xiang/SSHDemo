@@ -2,6 +2,7 @@ package com.tjrac.crm.post.dao.impl;
 
 import java.util.List;
 
+import org.hibernate.Query;
 import org.springframework.orm.hibernate3.support.HibernateDaoSupport;
 
 import com.tjrac.crm.department.domain.CrmDepartment;
@@ -31,8 +32,18 @@ public class PostDaoImpl extends HibernateDaoSupport implements PostDao{
 	}
 
 	@Override
-	public void add(CrmPost post) {
-		this.getHibernateTemplate().save(post);
+	public int findTotalRecord() {
+		String hql = "select count(c) from CrmPost c";
+		List<Long> list = this.getHibernateTemplate().find(hql);
+		return list.get(0).intValue();
 	}
 
+	@Override
+	public List<CrmPost> findAll(int startIndex, int pageSize) {
+		String hql = "from CrmPost";
+		Query query = this.getSession().createQuery(hql);
+		query.setFirstResult(startIndex);
+		query.setMaxResults(pageSize);
+		return query.list();
+	}
 }

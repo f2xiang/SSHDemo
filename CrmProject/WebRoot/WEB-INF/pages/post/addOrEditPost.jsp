@@ -45,15 +45,13 @@
 	    <td>选择部门：</td>
 	    <td>
 			<s:select list="allDepartment" name="department.depId" 
-			    listKey="depId" listValue="depName"
-			    headerKey="" headerValue="----请--选--择----">
+			    listKey="depId" listValue="depName">
 			</s:select>
-			<s:property value=""/>
   		</td>
 	    <td>职务：</td>
 	    <td> 
-	      <s:select list="allPost" 
-	            	listKey="postId" listValue="postName" 
+	      <s:select list="allPost" name="postName"
+	            	listKey="postName" listValue="postName" 
 	             headerKey="" headerValue="----请--选--择----">
 	      </s:select> 
 	     </td>

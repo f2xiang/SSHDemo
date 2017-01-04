@@ -127,6 +127,14 @@ public class StaffAction extends ActionSupport implements ModelDriven<CrmStaff>{
 	 * ĞŞ¸ÄÃÜÂë
 	 * @return
 	 */
+	public String updPwdUI(){
+		//ĞŞ¸ÄÃÜÂë TODO
+		
+		return "updPwdUI";
+	}
+	
+	
+	
 	public String updPwd(){
 		
 		return "updPwd";

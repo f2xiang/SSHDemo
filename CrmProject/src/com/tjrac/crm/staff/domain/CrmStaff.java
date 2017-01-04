@@ -31,6 +31,39 @@ public class CrmStaff {
 	
 	//     员工 对 职务  多 对 【一】
 	private CrmPost post;
+	
+	
+	//------------修改密码------------
+	private String oldPassword;  //老的密码
+	private String newPassword; //新的密码
+	private String reNewPassword; //再次确认密码
+	
+	
+	
+
+	public String getOldPassword() {
+		return oldPassword;
+	}
+
+	public void setOldPassword(String oldPassword) {
+		this.oldPassword = oldPassword;
+	}
+
+	public String getNewPassword() {
+		return newPassword;
+	}
+
+	public void setNewPassword(String newPassword) {
+		this.newPassword = newPassword;
+	}
+
+	public String getReNewPassword() {
+		return reNewPassword;
+	}
+
+	public void setReNewPassword(String reNewPassword) {
+		this.reNewPassword = reNewPassword;
+	}
 
 	public String getStaffId() {
 		return staffId;

@@ -33,6 +33,8 @@
 	       		<!-- 注销 返回登录 -->
 	       		<result name="logout">/WEB-INF/pages/login.jsp</result>
 	       		
+	       		<!-- 修改密码的ui界面 -->
+	       		<result name="updPwdUI">/WEB-INF/pages/staff/updPwd.jsp</result>
 	       		<!-- 修改密码 返回登录 -->
 	       		<result name="updPwd">/WEB-INF/pages/login.jsp</result>
 	        </action>

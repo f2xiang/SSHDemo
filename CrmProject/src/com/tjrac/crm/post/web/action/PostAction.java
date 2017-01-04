@@ -14,6 +14,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.tjrac.crm.department.domain.CrmDepartment;
 import com.tjrac.crm.department.service.DepartmentService;
+import com.tjrac.crm.page.PageBean;
 import com.tjrac.crm.post.domain.CrmPost;
 import com.tjrac.crm.post.service.PostService;
 
@@ -63,13 +64,35 @@ public class PostAction extends ActionSupport implements ModelDriven<CrmPost>{
 		return "none";
 	}
 	
+	
+	//--------------------分页数据-------------------
+	private int pageNum = 1;
+	
+	public void setPageNum(int pageNum) {
+		this.pageNum = pageNum;
+	}
+	
+	private int pageSize = 2;
+	
+	public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+	
+	//------------------------------------------------
+	
+	
 	/**
 	 * 查询所有的职务 包括职务相对应的部门
 	 * @return
 	 */
 	public String findAll(){
-		List<CrmPost> allPost = this.postService.findAll();
-		ActionContext.getContext().put("allPost", allPost);
+//		List<CrmPost> allPost = this.postService.findAll();
+//		ActionContext.getContext().put("allPost", allPost);
+		
+		
+		//分页查询数据
+		PageBean<CrmPost> pageBean = this.postService.findAll(pageNum, pageSize);
+		ActionContext.getContext().put("pageBean", pageBean);
 		return "findAll";
 	}
 	
@@ -77,6 +100,10 @@ public class PostAction extends ActionSupport implements ModelDriven<CrmPost>{
 	public String editUI(){
 
 		//如果职务id不为 空 就是更新  需要数据的回显   
+		if(StringUtils.isNotBlank(crmPost.getPostId())){
+			CrmPost findPost = postService.findById(crmPost.getPostId());
+			ActionContext.getContext().put("findPost", findPost);
+		}
 		
 		
 		//1 回显 所有的部门数据
@@ -87,10 +114,6 @@ public class PostAction extends ActionSupport implements ModelDriven<CrmPost>{
 		List<CrmPost> allPost = postService.findAll();
 		ActionContext.getContext().getValueStack().set("allPost", allPost);
 		
-		if(StringUtils.isNotBlank(crmPost.getPostId())){
-			CrmPost findPost = postService.findById(crmPost.getPostId());
-			ActionContext.getContext().put("findPost", findPost);
-		}
 		
 		return "editUI";
 	}
@@ -101,9 +124,5 @@ public class PostAction extends ActionSupport implements ModelDriven<CrmPost>{
 		return "addOrUpdate";
 	}
 	
-	public String add(){
-		this.postService.add(crmPost);
-		return "add";
-	}
 	
 }

@@ -34,7 +34,7 @@
 </head>
 
 <body class="updpwd">
-	<form action="/crm2/staff/staffAction_editPassword.action" method="post">
+	<s:form namespace="/" action="staffAction_updPwd">
 		<table style="width: 200px">
 			<tr>
 				<td colspan="2">
@@ -43,25 +43,23 @@
 			</tr>
 			<tr>
 				<td>原始密码：</td>
-				<td><input type="password" name="oldPassword" value="" /></td>
+				<td><s:password name="oldPassword"></s:password> </td>
 			</tr>
 			<tr>
 				<td>新&nbsp;密&nbsp;码：</td>
-				<td><input type="password" name="newPassword" value="" /></td>
+				<td><s:password name="newPassword"></s:password> </td>
 			</tr>
 			<tr>
 				<td>确认密码：</td>
-				<td><input type="password" name="reNewPassword" value="" /></td>
+				<td><s:password name="reNewPassword"></s:password></td>
 			</tr>
 			<tr>
 				<td colspan="2">
-					<input type="submit"  value="修改" class="login_btn"/>
-
-					<button type="reset" value="关闭" class="login_btn">关闭</button>
-
+					<s:submit value="修改" cssClass="login_btn"></s:submit>
+					<s:reset value="关闭" cssClass="login_btn"></s:reset>
 				</td>
 			</tr>
 		</table>
-	</form>
+	</s:form>
 </body>
 </html>
