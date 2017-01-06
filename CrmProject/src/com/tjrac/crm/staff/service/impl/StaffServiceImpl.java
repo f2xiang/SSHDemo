@@ -1,7 +1,11 @@
 package com.tjrac.crm.staff.service.impl;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.lang3.StringUtils;
+
+import com.tjrac.crm.page.PageBean;
 import com.tjrac.crm.staff.dao.StaffDao;
 import com.tjrac.crm.staff.domain.CrmStaff;
 import com.tjrac.crm.staff.service.StaffService;
@@ -56,6 +60,79 @@ public class StaffServiceImpl implements StaffService{
 		findStaff.setGender(crmStaff.getGender());
 		findStaff.setOnDutyDate(crmStaff.getOnDutyDate());
 		findStaff.setPost(crmStaff.getPost());
+	}
+
+	@Override
+	public boolean updatePwdOld(String oldPassword, String staffId) {
+		boolean flag = false;
+		
+		//用户 输入的密码加密成md5
+		String md5pwd = MyMd5Util.getMD5Value(oldPassword);
+		
+		//从数据库里找出来的密码
+		String psw = this.staffDao.findById(staffId).getLoginPwd();
+		
+		if(psw.equals(md5pwd)){
+			flag = true;
+		}
+		
+		return flag;
+	}
+
+	@Override
+	public boolean updatePwdNew(String newPassword, String reNewPassword, String staffId) {
+		boolean flag = false;
+		//检验 两次输入的新密码是否一致
+		if(newPassword.equals(reNewPassword)){
+			flag = true;
+		}
+		
+		
+		//新密码重新加密， 更改数据库中的密码
+		CrmStaff findStaff =  this.staffDao.findById(staffId);
+		String md5pwd = MyMd5Util.getMD5Value(newPassword);
+		findStaff.setLoginPwd(md5pwd);
+		
+		return flag;
+	}
+
+	@Override
+	public PageBean<CrmStaff> findAllStaff(CrmStaff crmStaff, int pageNum,
+			int pageSize) {
+		
+		//1 条件查询
+		StringBuilder sb = new StringBuilder();
+		List<Object> paramslist = new ArrayList<Object>();
+		
+		//过滤条件
+		//部门
+//		if(StringUtils.isNotBlank(crmStaff.getPost().getDepartment().getDepId())){
+//			sb.append(" and CrmStaff.post.")
+//		}
+		//TODO 部门 职务 的 多条件查询
+		//职务
+		
+		//姓名
+		if(StringUtils.isNotBlank(crmStaff.getStaffName())){
+			sb.append(" and staffName like ?");
+			paramslist.add("%"+crmStaff.getStaffName()+"%");
+		}
+		
+		String condition = sb.toString();
+		
+		Object [] params = paramslist.toArray();
+		
+		
+		//分页
+		int totalRecord = this.staffDao.getTotalRecord(condition, params);
+		
+		PageBean<CrmStaff> pageBean = new PageBean<CrmStaff>(pageNum, pageSize, totalRecord);
+		
+		List<CrmStaff> data =
+				 this.staffDao.findAll(condition, params, pageBean.getStartIndex(), pageBean.getPageSize());
+		pageBean.setData(data);
+		
+		return pageBean;
 	}
 
 }

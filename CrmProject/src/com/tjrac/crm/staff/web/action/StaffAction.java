@@ -5,8 +5,10 @@ import java.util.List;
 import com.opensymphony.xwork2.ActionContext;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import com.tjrac.crm.coursetype.domain.CrmCourseType;
 import com.tjrac.crm.department.domain.CrmDepartment;
 import com.tjrac.crm.department.service.DepartmentService;
+import com.tjrac.crm.page.PageBean;
 import com.tjrac.crm.staff.domain.CrmStaff;
 import com.tjrac.crm.staff.service.StaffService;
 import com.tjrac.crm.utils.MyMd5Util;
@@ -61,10 +63,46 @@ public class StaffAction extends ActionSupport implements ModelDriven<CrmStaff>{
 		return "home";
 	}
 	
+	
+	//------------分页数据------------------------
+	
+	 private int pageNum = 1;
+	 
+	 public void setPageNum(int pageNum) {
+		this.pageNum = pageNum;
+	 }
+	 
+	 private int pageSize = 2;
+	 
+	 public void setPageSize(int pageSize) {
+		this.pageSize = pageSize;
+	}
+	
+
+	//-------------------------------------
+	
 	public String findAll(){
-		List<CrmStaff> allStaff = staffService.findAllStaff();
-		//把查询的结果存放到值栈中 方便 jsp获得
-		ActionContext.getContext().put("allStaff", allStaff); 
+		
+		//页面分两个部分  上面一部分是 条件查询  下面与部分是显示员工的信息 
+		//但是由于一进入这个页面的同时 条件查询  和 员工的信息要同时的显示出来 
+		//所以我们把他写在一个方法里面了
+		
+		//条件查询 显示 部门部分
+		List<CrmDepartment> listDept = this.departmentService.findAll();
+		ActionContext.getContext().getValueStack().set("listDept", listDept);
+		
+		
+		//显示员工部分
+//		List<CrmStaff> allStaff = staffService.findAllStaff();
+//		//把查询的结果存放到值栈中 方便 jsp获得
+//		ActionContext.getContext().put("allStaff", allStaff); 
+		
+		
+		//分页 + 条件查询
+		PageBean<CrmStaff> pageBean = 
+				this.staffService.findAllStaff(crmStaff, pageNum, pageSize);
+		ActionContext.getContext().put("pageBean", pageBean);
+		
 		return "findAll";
 	}
 	
@@ -128,7 +166,6 @@ public class StaffAction extends ActionSupport implements ModelDriven<CrmStaff>{
 	 * @return
 	 */
 	public String updPwdUI(){
-		//修改密码 TODO
 		
 		return "updPwdUI";
 	}
@@ -136,7 +173,21 @@ public class StaffAction extends ActionSupport implements ModelDriven<CrmStaff>{
 	
 	
 	public String updPwd(){
-		
-		return "updPwd";
+		//校验  输入的原始密码 和 数据库中的匹配
+		boolean flag1 = this.staffService.updatePwdOld(this.crmStaff.getOldPassword(),crmStaff.getStaffId());
+		if(flag1){
+			//校验  新密码 和确认密码要一致
+			boolean flag2 = this.staffService.updatePwdNew(this.crmStaff.getNewPassword(), this.crmStaff.getReNewPassword(),crmStaff.getStaffId());
+			if(flag2){
+				return "login";
+			}else{
+				this.addFieldError("", "两次密码不一致，请重新输入");
+				return "updPwdUI";
+			}
+		}else{
+			this.addFieldError("", "请输入正确的密码");
+			return "updPwdUI";
+		}
+
 	}
 }

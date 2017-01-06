@@ -36,6 +36,27 @@ public interface StaffDao {
 	 */
 	public void add(CrmStaff crmStaff);
 	
+	/**
+	 * 条件查询 获取总的数据的记录数
+	 * @param condition
+	 * @param params
+	 * @return
+	 */
+	public int getTotalRecord(String condition, Object[] params);
+	
+	/**
+	 * 条件 + 分页 查询到数据
+	 * @param condition
+	 * @param params
+	 * @param startIndex
+	 * @param pageSize
+	 * @return
+	 */
+	public List<CrmStaff> findAll(String condition, Object[] params,
+			int startIndex, int pageSize);
+	
+	
+	
 
 	
 	

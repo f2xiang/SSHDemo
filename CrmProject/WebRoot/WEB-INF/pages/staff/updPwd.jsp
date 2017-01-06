@@ -32,9 +32,12 @@
 		}
 	</script>
 </head>
-
 <body class="updpwd">
 	<s:form namespace="/" action="staffAction_updPwd">
+	<s:hidden name="staffId" value="%{#session.loginStaff.staffId}"></s:hidden>
+		<font color="#ff0000">
+			<s:fielderror></s:fielderror>
+		</font> 
 		<table style="width: 200px">
 			<tr>
 				<td colspan="2">
@@ -56,7 +59,6 @@
 			<tr>
 				<td colspan="2">
 					<s:submit value="修改" cssClass="login_btn"></s:submit>
-					<s:reset value="关闭" cssClass="login_btn"></s:reset>
 				</td>
 			</tr>
 		</table>

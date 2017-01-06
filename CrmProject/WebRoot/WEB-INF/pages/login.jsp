@@ -40,7 +40,6 @@ FONT-SIZE: 12px; COLOR: #4b4b4b; LINE-HEIGHT: 18px; TEXT-DECORATION: none
 		<tr>
 			<td background="${pageContext.request.contextPath}/images/right.jpg"  width="740" height="412"></td>
 			<td class="login_msg" width="400">
-			    
 			    <!-- 员工登陆的验证 -->
 			    <s:form action="staffAction_login" namespace="/">
 					&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<img src="${pageContext.request.contextPath}/images/title.png" width="185" height="26"/>

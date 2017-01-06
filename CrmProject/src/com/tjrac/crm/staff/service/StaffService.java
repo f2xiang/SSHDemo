@@ -2,6 +2,7 @@ package com.tjrac.crm.staff.service;
 
 import java.util.List;
 
+import com.tjrac.crm.page.PageBean;
 import com.tjrac.crm.staff.domain.CrmStaff;
 
 /**
@@ -39,4 +40,30 @@ public interface StaffService {
 	 * @param crmStaff 封装要修改数据的员工实体
 	 */
 	public void updateStaff(CrmStaff crmStaff);
+	
+	/**
+	 * 修改密码的时候 校验输入的原始密码 是否和数据库中的匹配
+	 * @param oldPassword
+	 * @return
+	 */
+	public boolean updatePwdOld(String oldPassword, String staffId);
+
+	
+	/**
+	 * 修改密码的时候 检验两次输入的新密码是否相同
+	 * @param newPassword
+	 * @param reNewPassword
+	 * @return
+	 */
+	public boolean updatePwdNew(String newPassword, String reNewPassword, String staffId);
+	
+	/**
+	 * 分页 + 条件 查询
+	 * @param crmStaff 
+	 * @param pageNum
+	 * @param pageSize
+	 * @return
+	 */
+	public PageBean<CrmStaff> findAllStaff(CrmStaff crmStaff, int pageNum,
+			int pageSize);
 }
