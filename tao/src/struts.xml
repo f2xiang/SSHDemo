@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.devMode" value="true" />
+     
+    <package name="tao" namespace="/" extends="struts-default">
+    	<global-results>
+    		<result name="msg">/WEB-INF/jsp/msg.jsp</result>
+    	</global-results>
+    	
+        <!-- 首页访问的action -->
+        <action name="index" class="indexAction">
+        	<result name="index">/WEB-INF/jsp/index.jsp</result>
+        </action>
+        
+        <!-- 验证码的action -->
+        <action name="checkImage" class="checkImageAction"></action>
+        
+        <action name="user_*" class="userAction" method="{1}">
+        	<!-- 注册的ui界面 -->
+        	<result name="registerUI">/WEB-INF/jsp/register.jsp</result>
+        	
+        	<!-- 后台校验不通过 回到input -->
+        	<result name="input">/WEB-INF/jsp/register.jsp</result>
+        	
+        	<!-- 跳转到登录页面 -->
+        	<result name="loginUI">/WEB-INF/jsp/login.jsp</result>
+        	<result name="login">/WEB-INF/jsp/login.jsp</result>
+        	<result name="loginSuccess" type="redirectAction">index</result>
+        	
+        	<!-- 注销 -->
+        	<result name="logout">/WEB-INF/jsp/index.jsp</result>
+        </action>
+    </package>
+
+
+	
+</struts>
