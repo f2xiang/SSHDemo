@@ -5,6 +5,7 @@ import org.springframework.transaction.annotation.Transactional;
 import com.tjrac.tao.user.dao.UserDao;
 import com.tjrac.tao.user.service.UserService;
 import com.tjrac.tao.user.vo.User;
+import com.tjrac.tao.util.MD5Utils;
 import com.tjrac.tao.util.MailUtils;
 import com.tjrac.tao.util.UUIDUtils;
 
@@ -33,6 +34,9 @@ public class UserServiceImpl implements UserService{
 		//发送激活邮件
 		MailUtils.sendMail(user.getEmail(), code);
 		
+		//MD5加密
+		user.setPassword(MD5Utils.getMD5(user.getPassword()));
+		
 		this.userDao.add(user);
 	}
 
@@ -48,6 +52,7 @@ public class UserServiceImpl implements UserService{
 
 	@Override
 	public User login(User user) {
+		user.setPassword(MD5Utils.getMD5(user.getPassword()));
 		return this.userDao.login(user);
 	}
 	

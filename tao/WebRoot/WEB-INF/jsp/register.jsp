@@ -101,6 +101,7 @@
 					</div>
 					<form id="registerForm" action="${pageContext.request.contextPath}/user_register.action" method="post" novalidate="novalidate" onsubmit="return checkForm();">
 						<table>
+							
 							<tbody><tr>
 								<th>
 									<span class="requiredField">*</span>用户名:
@@ -168,6 +169,7 @@
 										<span class="fieldSet">
 											<input type="text" id="captcha" name="captcha" class="text captcha" maxlength="4" autocomplete="off">
 											<img id="captchaImage" class="captchaImage" src="${pageContext.request.contextPath}/checkImage.action" title="点击更换验证码" onclick="changeCheckimg()">
+											<font color="red"><s:actionmessage /></font>
 										</span>
 									</td>
 								</tr>

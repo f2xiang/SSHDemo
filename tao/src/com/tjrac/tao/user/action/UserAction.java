@@ -76,12 +76,26 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 	 * @return
 	 */
 	public String register(){
-		//注册数据的后台校验 -- > UserAction-user_register-validation.xml
 		
-		//数据存到数据库
-		this.userService.add(user);
-		this.addActionMessage("注册成功！！请到邮箱中激活~");
-		return "msg";
+		//验证码的校验
+		String checkcode = (String) ServletActionContext.getRequest().getSession().getAttribute("checkcode");
+		
+		if(checkcode.equalsIgnoreCase(user.getCaptcha())){
+			//验证码正确
+			
+			//注册数据的后台校验 -- > UserAction-user_register-validation.xml
+			
+			//数据存到数据库
+			this.userService.add(user);
+			this.addActionMessage("注册成功！！请到邮箱中激活~");
+			return "msg";
+		}else{
+			this.addActionMessage("验证码错误");
+			return "input";
+		}
+		
+		
+		
 	}
 	
 	/**
@@ -126,15 +140,26 @@ public class UserAction extends ActionSupport implements ModelDriven<User>{
 	 */
 	public String login(){
 		User findUser = this.userService.login(user);
-		if(findUser == null){
-			//登录失败
-			this.addFieldError("", "用户名或密码错误");
-			return LOGIN;
+		String checkcode = (String) ServletActionContext.getRequest().getSession().getAttribute("checkcode");
+		
+		if(checkcode.equalsIgnoreCase(user.getCaptcha())){
+			//验证码正确
+			if(findUser == null){
+				//登录失败
+				this.addFieldError("", "用户名或密码错误");
+				return LOGIN;
+			}else{
+				//成功 登录标志
+				ServletActionContext.getRequest().getSession().setAttribute("user", findUser);
+				return "loginSuccess";
+			}
 		}else{
-			//成功 登录标志
-			ServletActionContext.getRequest().getSession().setAttribute("user", findUser);
-			return "loginSuccess";
+			//验证码错误
+			this.addFieldError("", "验证码错误");
+			return LOGIN;
 		}
+		
+		
 	}
 	
 	
