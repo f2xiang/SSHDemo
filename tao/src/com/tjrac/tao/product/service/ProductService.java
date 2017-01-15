@@ -38,6 +38,14 @@ public interface ProductService {
 	 * @return
 	 */
 	public PageBean<Product> findByPageCid(Integer cid, int currentPage);
+
+	/**
+	 * 根据二级分类的id查询分页的商品数据
+	 * @param csid
+	 * @param currentPage
+	 * @return
+	 */
+	public PageBean<Product> findByPageCsid(Integer csid, int currentPage);
 	
 	
 

@@ -60,10 +60,26 @@ public class ProductDaoImpl extends HibernateDaoSupport implements ProductDao{
 	@Override
 	public List<Product> findByPageCid(Integer cid, int beginIndex,
 			int pageCount) {
-		//TODO BUG!!!
 		String hql = "select p from Product p join p.categorySecond cs join cs.category c where c.cid = ?";
 		//·ÖÒ³
 		return this.getHibernateTemplate().execute(new PageHibernateCallback<Product>(hql, new Object[]{cid}, beginIndex, pageCount));
+	}
+
+
+	@Override
+	public int findTotalCountByCsid(Integer csid) {
+		String hql = "select count(p) from Product p where p.categorySecond.csid = ? "; 
+		List<Long> list =  this.getHibernateTemplate().find(hql, csid);
+		return list.get(0).intValue();
+	}
+
+
+	@Override
+	public List<Product> findByPageCsid(Integer csid, int beginIndex,
+			int pageCount) {
+		String hql = "select p from Product p join p.categorySecond cs where cs.csid = ?";
+		//·ÖÒ³
+		return this.getHibernateTemplate().execute(new PageHibernateCallback<Product>(hql, new Object[]{csid}, beginIndex, pageCount));
 	}
 
 }

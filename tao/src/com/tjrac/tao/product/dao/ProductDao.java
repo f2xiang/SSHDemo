@@ -30,20 +30,37 @@ public interface ProductDao {
 	public Product findByPid(Integer pid);
 
 	/**
-	 * 根据分类的id查询商品的个数
+	 * 根据一级分类的id查询商品的个数
 	 * @param cid
 	 * @return
 	 */
 	public int findTotalCount(Integer cid);
 
 	/**
-	 * 根据分类的id来查询商品的集合
+	 * 根据一级分类的id来查询商品的集合
 	 * @param cid
 	 * @param beginIndex
 	 * @param pageCount
 	 * @return
 	 */
 	public List<Product> findByPageCid(Integer cid, int beginIndex,
+			int pageCount);
+
+	/**
+	 * 根据二级级分类的id查询商品的个数
+	 * @param csid
+	 * @return
+	 */
+	public int findTotalCountByCsid(Integer csid);
+
+	/**
+	 * 根据二级分类的id查询分页的数据
+	 * @param csid
+	 * @param beginIndex
+	 * @param pageCount
+	 * @return
+	 */
+	public List<Product> findByPageCsid(Integer csid, int beginIndex,
 			int pageCount);
 
 }

@@ -7,6 +7,7 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.tjrac.tao.category.service.CategoryService;
 import com.tjrac.tao.category.vo.Category;
+import com.tjrac.tao.categorysecond.service.CategorySecondService;
 import com.tjrac.tao.product.service.ProductService;
 import com.tjrac.tao.product.vo.Product;
 import com.tjrac.tao.util.PageBean;
@@ -36,6 +37,9 @@ public class ProductAction extends ActionSupport implements ModelDriven<Product>
 		this.categoryService = categoryService;
 	}
 	
+	
+	
+	
 	//-------------------动作-----------------
 	
 	/**
@@ -56,6 +60,9 @@ public class ProductAction extends ActionSupport implements ModelDriven<Product>
 		this.cid = cid;
 	}
 	
+	public Integer getCid() {
+		return cid;
+	}
 	
 	//---------------------分页数据---------------
 	private int currentPage;
@@ -79,6 +86,34 @@ public class ProductAction extends ActionSupport implements ModelDriven<Product>
 		ActionContext.getContext().getValueStack().set("pageBean", pageBean);
 		
 		return "findByCid";
+	}
+	
+	
+	
+	//-----------------二级分类的id-------------
+	private Integer csid;
+	
+	public void setCsid(Integer csid) {
+		this.csid = csid;
+	}
+
+	
+	public Integer getCsid() {
+		return csid;
+	}
+	
+	//---------------------------------------
+	
+
+	/**
+	 * 根据二级分类的id查询商品
+	 * @return
+	 */
+	public String findByCsid(){
+		PageBean<Product> pageBean =  this.productService.findByPageCsid(csid, currentPage);
+		ActionContext.getContext().getValueStack().set("pageBean", pageBean);
+		
+		return "findByCsid";
 	}
 	
 }

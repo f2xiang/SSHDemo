@@ -32,51 +32,94 @@
 			<s:iterator value="#session.cList" var="c">
 				<dl>
 					<dt>
-						<a href="${pageContext.request.contextPath}/"><s:property value="#c.cname" /> </a>
+						<a href="${pageContext.request.contextPath}/product_findByCid?cid=<s:property value="#c.cid" />&currentPage=1"><s:property value="#c.cname" /> </a>
 					</dt>
 					<s:iterator value="#c.categorySeconds" var="cs">
 						<dd>
-							<a ><s:property value="#cs.csname" /> </a>
+							<a href="${pageContext.request.contextPath}/product_findByCsid?csid=<s:property value="#cs.csid" />&currentPage=1"><s:property value="#cs.csname" /> </a>
 						</dd>
 					</s:iterator>
 				</dl>
 				</s:iterator>
 			</div>
 		</div>
-		<div class="span18 last">
+	<div class="span18 last">
 			
-			<form id="productForm" action="${pageContext.request.contextPath}/image/蔬菜 - Powered By Mango Team.htm" method="get">
-				<div id="result" class="result table clearfix">
-					<ul>
-						<s:iterator value="pageBean.list" var="p">
-						<li>
-							<a href="./京华商城分页面.htm">
-								<img src="${pageContext.request.contextPath}/<s:property value="#p.image" /> " width="170" height="170"  style="display: inline-block;">
-								   
-								<span style='color:green'>
+		<form id="productForm" action="${pageContext.request.contextPath}/image/蔬菜 - Powered By Mango Team.htm" method="get">
+			<div id="result" class="result table clearfix">
+				<ul>
+					<s:iterator value="pageBean.list" var="p">
+					<li>
+						<s:a namespace="/" action="product_findByPid">
+							<s:param name="pid" value="#p.pid"></s:param>
+							<img src="${pageContext.request.contextPath}/<s:property value="#p.image" /> " width="170" height="170"  style="display: inline-block;">
+							<span style='color:green'>
 								<s:property value="#p.pname" />
-								</span>
-								 
-								<span class="price">
-									商城价： ￥  <s:property value="#p.shop_price" />  /份
-								</span>
-							</a>
-						</li>
-						</s:iterator>
-					</ul>
-				</div>
+							</span>
+							<span class="price">
+								商城价： ￥  <s:property value="#p.shop_price" />  /份
+							</span>
+						</s:a>
+					</li>
+					</s:iterator>
+				</ul>
+			</div>
+	
+		<!-- 分页 -->
 	<div class="pagination">
-			<span class="firstPage">&nbsp;</span>
-			<span class="previousPage">&nbsp;</span>
-				<span class="currentPage">1</span>
-				<a href="javascript: $.pageSkip(2);">2</a>
-			<a class="nextPage" href="javascript: $.pageSkip(2);">&nbsp;</a>
+		<span>	第<s:property value="pageBean.currentPage" />/<s:property value="pageBean.totalPage" />页</span>
 			
-			<a class="lastPage" href="javascript: $.pageSkip(2);">&nbsp;</a>
-	</div>
-			</form>
+		<s:if test="cid != null">
+			<!-- 如果是第一页 就不显示首页  和 上一页 -->
+			<s:if test="pageBean.currentPage != 1">
+				<a href="${pageContext.request.contextPath}/product_findByCid?cid=<s:property value="cid" />&currentPage=1" class="firstPage">&nbsp;</a> 
+				<a href="${pageContext.request.contextPath}/product_findByCid?cid=<s:property value="cid" />&currentPage=<s:property value="pageBean.currentPage-1" />"  class="previousPage">&nbsp;</a>
+			</s:if>
+			
+			<!-- 如果当前页已被选中 不能再被点了  而且 加上被选中的样式 -->
+			<s:iterator begin="1" end="pageBean.totalPage" var="i">
+				<s:if test="pageBean.currentPage != #i">
+					<a  href="${pageContext.request.contextPath}/product_findByCid?cid=<s:property value="cid" />&currentPage=<s:property value="#i" />"><s:property value="#i" /></a>
+				</s:if>
+				<s:else>
+					<span class="currentPage"><s:property value="#i" /> </span>
+				</s:else>
+			</s:iterator>
+			
+			<!-- 如果在最后一页 不显示下一页 和 最后一页 -->
+			<s:if test="pageBean.currentPage != pageBean.totalPage">
+				<a class="nextPage" href="${pageContext.request.contextPath}/product_findByCid?cid=<s:property value="cid" />&currentPage=<s:property value="pageBean.currentPage+1" />">&nbsp;</a>
+				<a class="lastPage" href="${pageContext.request.contextPath}/product_findByCid?cid=<s:property value="cid" />&currentPage=<s:property value="pageBean.totalPage" />">&nbsp;</a>
+			</s:if>
+		</s:if>	
+		
+		<s:if test="csid != null">
+			<s:if test="pageBean.currentPage != 1">
+				<a href="${pageContext.request.contextPath}/product_findByCsid?csid=<s:property value="csid" />&currentPage=1" class="firstPage">&nbsp;</a> 
+				<a href="${pageContext.request.contextPath}/product_findByCsid?csid=<s:property value="csid" />&currentPage=<s:property value="pageBean.currentPage-1" />"  class="previousPage">&nbsp;</a>
+			</s:if>
+			
+			<!-- 如果当前页已被选中 不能再被点了  而且 加上被选中的样式 -->
+			<s:iterator begin="1" end="pageBean.totalPage" var="i">
+				<s:if test="pageBean.currentPage != #i">
+					<a  href="${pageContext.request.contextPath}/product_findByCsid?csid=<s:property value="csid" />&currentPage=<s:property value="#i" />"><s:property value="#i" /></a>
+				</s:if>
+				<s:else>
+					<span class="currentPage"><s:property value="#i" /> </span>
+				</s:else>
+			</s:iterator>
+			
+			<!-- 如果在最后一页 不显示下一页 和 最后一页 -->
+			<s:if test="pageBean.currentPage != pageBean.totalPage">
+				<a class="nextPage" href="${pageContext.request.contextPath}/product_findByCsid?csid=<s:property value="csid" />&currentPage=<s:property value="pageBean.currentPage+1" />">&nbsp;</a>
+				<a class="lastPage" href="${pageContext.request.contextPath}/product_findByCsid?csid=<s:property value="csid" />&currentPage=<s:property value="pageBean.totalPage" />">&nbsp;</a>
+			</s:if>
+		</s:if>
+		
 		</div>
+		</form>
 	</div>
+</div>
 <div class="container footer">
 	<div class="span24">
 		<div class="footerAd">

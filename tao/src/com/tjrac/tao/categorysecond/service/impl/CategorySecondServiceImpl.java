@@ -9,6 +9,7 @@ public class CategorySecondServiceImpl implements CategorySecondService{
 	public void setCategorySecondDao(CategorySecondDao categorySecondDao) {
 		this.categorySecondDao = categorySecondDao;
 	}
+
 	
 	
 }
