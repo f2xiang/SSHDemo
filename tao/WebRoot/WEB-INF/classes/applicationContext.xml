@@ -121,4 +121,9 @@
    		<property name="sessionFactory" ref="sessionFactory"></property>
    </bean>	
   	
+   <!-- ==================购物车模块======================= -->  
+   <!-- 购物车的action -->	
+   <bean id="cartAction" class="com.tjrac.tao.cart.action.CartAction" scope="prototype">
+   		<property name="productService" ref="productService"></property>
+   </bean>	
 </beans>

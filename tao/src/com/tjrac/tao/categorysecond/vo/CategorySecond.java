@@ -1,5 +1,6 @@
 package com.tjrac.tao.categorysecond.vo;
 
+import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -11,7 +12,7 @@ import com.tjrac.tao.product.vo.Product;
  * @author FengXiang
  *
  */
-public class CategorySecond {
+public class CategorySecond implements Serializable {
 	/*
    CREATE TABLE `categorysecond` (
   `csid` int(11) NOT NULL AUTO_INCREMENT,

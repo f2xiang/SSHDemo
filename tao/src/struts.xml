@@ -36,11 +36,21 @@
         	<result name="logout">/WEB-INF/jsp/index.jsp</result>
         </action>
         
+        <!-- 商品的action -->
         <action name="product_*" class="productAction" method="{1}">
         	<result name="findByPid">/WEB-INF/jsp/product.jsp</result>
         	<result name="findByCid">/WEB-INF/jsp/productList.jsp</result>
         	<result name="findByCsid">/WEB-INF/jsp/productList.jsp</result>
         </action>
+        
+        <!-- 购物车的action -->
+        <action name="cart_*" class="cartAction" method="{1}">
+        	<result name="addCart">/WEB-INF/jsp/cart.jsp</result>
+        	<result name="clearCart">/WEB-INF/jsp/cart.jsp</result>
+        	<result name="delCart">/WEB-INF/jsp/cart.jsp</result>
+        	<result name="myCart">/WEB-INF/jsp/cart.jsp</result>
+        </action>
+        
     </package>
 
 

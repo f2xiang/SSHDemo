@@ -1,5 +1,6 @@
 package com.tjrac.tao.product.vo;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import com.tjrac.tao.categorysecond.vo.CategorySecond;
@@ -9,7 +10,7 @@ import com.tjrac.tao.categorysecond.vo.CategorySecond;
  * @author FengXiang
  *
  */
-public class Product {
+public class Product implements Serializable{
 	/*
    CREATE TABLE `product` (
   `pid` int(11) NOT NULL AUTO_INCREMENT,
