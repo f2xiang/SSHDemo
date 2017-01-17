@@ -15,4 +15,24 @@ public class CategoryDaoImpl extends HibernateDaoSupport implements CategoryDao{
 		return this.getHibernateTemplate().find(hql);
 	}
 
+	@Override
+	public void save(Category category) {
+		this.getHibernateTemplate().save(category);
+	}
+
+	@Override
+	public void delteByCid(Category category) {
+		this.getHibernateTemplate().delete(category);
+	}
+
+	@Override
+	public Category findByCid(Integer cid) {
+		return this.getHibernateTemplate().get(Category.class, cid);
+	}
+
+	@Override
+	public void update(Category category) {
+		this.getHibernateTemplate().update(category);
+	}
+
 }

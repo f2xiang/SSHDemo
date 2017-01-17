@@ -26,6 +26,30 @@ public class CategoryServiceImpl implements CategoryService{
 	public List<Category> findAll() {
 		return this.categoryDao.findAll();
 	}
+
+
+	@Override
+	public void save(Category category) {
+		this.categoryDao.save(category);
+	}
+
+
+	@Override
+	public void deleteByCid(Integer cid) {
+		this.categoryDao.delteByCid(this.categoryDao.findByCid(cid));
+	}
+
+
+	@Override
+	public Category findByCid(Integer cid) {
+		return this.categoryDao.findByCid(cid);
+	}
+
+
+	@Override
+	public void update(Category category) {
+		this.categoryDao.update(category);
+	}
 	
 	
 }
