@@ -126,4 +126,22 @@
    <bean id="cartAction" class="com.tjrac.tao.cart.action.CartAction" scope="prototype">
    		<property name="productService" ref="productService"></property>
    </bean>	
+   
+   <!-- ==================订单模块======================= -->  
+   <!-- 订单的action -->	
+   <bean id="orderAction" class="com.tjrac.tao.order.action.OrderAction" scope="prototype">
+   		<property name="orderService" ref="orderService"></property>
+   </bean>
+   
+    <!-- 订单的service -->
+   <bean id="orderService" class="com.tjrac.tao.order.service.impl.OrderServiceImpl">
+   		<property name="orderDao" ref="orderDao"></property>
+   </bean>
+   
+    <!-- 订单的dao -->
+   <bean id="orderDao" class="com.tjrac.tao.order.dao.impl.OrderDaoImpl">
+   		<property name="sessionFactory" ref="sessionFactory"></property>
+   </bean>
+   
+   
 </beans>

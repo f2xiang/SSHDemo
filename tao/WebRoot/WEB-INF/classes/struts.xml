@@ -10,6 +10,7 @@
     <package name="tao" namespace="/" extends="struts-default">
     	<global-results>
     		<result name="msg">/WEB-INF/jsp/msg.jsp</result>
+    		<result name="login">/WEB-INF/jsp/login.jsp</result>
     	</global-results>
     	
         <!-- 首页访问的action -->
@@ -29,7 +30,6 @@
         	
         	<!-- 跳转到登录页面 -->
         	<result name="loginUI">/WEB-INF/jsp/login.jsp</result>
-        	<result name="login">/WEB-INF/jsp/login.jsp</result>
         	<result name="loginSuccess" type="redirectAction">index</result>
         	
         	<!-- 注销 -->
@@ -49,6 +49,13 @@
         	<result name="clearCart">/WEB-INF/jsp/cart.jsp</result>
         	<result name="delCart">/WEB-INF/jsp/cart.jsp</result>
         	<result name="myCart">/WEB-INF/jsp/cart.jsp</result>
+        </action>
+        
+        <!-- 订单的action -->
+        <action name="order_*" class="orderAction" method="{1}">
+        	<result name="addOrder">/WEB-INF/jsp/order.jsp</result>
+        	<result name="findByUid">/WEB-INF/jsp/orderList.jsp</result>
+        	<result name="findByOid">/WEB-INF/jsp/order.jsp</result>
         </action>
         
     </package>

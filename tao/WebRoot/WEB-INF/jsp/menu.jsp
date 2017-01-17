@@ -15,7 +15,7 @@
 						欢迎你：<s:property value="#session.user.name" />|
 					</li>
 					<li id="headerLogout" class="headerUsername" style="display: list-item;">
-						<a href="#">我的订单</a>|
+						<a href="${pageContext.request.contextPath }/order_findByUid.action?currentPage=1">我的订单</a>|
 					</li>
 					<li id="headerLogout" class="headerLogout" style="display: list-item;">
 						<a href="${pageContext.request.contextPath }/user_logout.action">退出</a>|
