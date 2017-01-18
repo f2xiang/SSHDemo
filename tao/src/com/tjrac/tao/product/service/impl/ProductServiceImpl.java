@@ -90,6 +90,50 @@ public class ProductServiceImpl implements ProductService{
 		pageBean.setList(list);
 		return pageBean;
 	}
+
+	@Override
+	public PageBean<Product> findAll(int currentPage) {
+		PageBean<Product> pageBean = new PageBean<Product>();
+		
+		//设置当前的页数
+		pageBean.setCurrentPage(currentPage);
+		//设置每页显示的记录数
+		int pageCount = 10;
+		pageBean.setPageCount(pageCount);
+		//设置总的记录数
+		int totalCount = this.productDao.findTotalCount();
+		pageBean.setTotalCount(totalCount);
+		//设置总的页数
+		int totalPage = 0;
+		if(totalCount % pageCount == 0){
+			totalPage = totalCount / pageCount;
+		}else{
+			totalPage = totalCount / pageCount + 1;
+		}
+		pageBean.setTotalPage(totalPage);
+		//设置起始
+		int beginIndex = (currentPage - 1) * pageCount; 
+		//每页显示的数据集合
+		List<Product> list = this.productDao.findAllByPage(beginIndex, pageCount);
+		pageBean.setList(list);
+		
+		return pageBean;
+	}
+
+	@Override
+	public void add(Product product) {
+		this.productDao.add(product);
+	}
+
+	@Override
+	public void update(Product product) {
+		this.productDao.update(product);
+	}
+
+	@Override
+	public void delete(Product product) {
+		this.productDao.delete(this.productDao.findByPid(product.getPid()));
+	}
 	
 	
 	

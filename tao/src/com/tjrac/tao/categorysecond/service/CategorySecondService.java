@@ -1,5 +1,7 @@
 package com.tjrac.tao.categorysecond.service;
 
+import java.util.List;
+
 import com.tjrac.tao.categorysecond.vo.CategorySecond;
 import com.tjrac.tao.util.PageBean;
 
@@ -41,5 +43,11 @@ public interface CategorySecondService {
 	 * @param categorySecond
 	 */
 	public void update(CategorySecond categorySecond);
+
+	/**
+	 * 查询所有的二级分类
+	 * @return
+	 */
+	public List<CategorySecond> findAll();
 
 }

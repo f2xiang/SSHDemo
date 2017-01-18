@@ -43,4 +43,10 @@ public class CategorySecondDaoImpl extends HibernateDaoSupport implements Catego
 		this.getHibernateTemplate().update(categorySecond);
 	}
 
+	@Override
+	public List<CategorySecond> findAll() {
+		String hql = "from CategorySecond";
+		return this.getHibernateTemplate().find(hql);
+	}
+
 }

@@ -50,4 +50,10 @@ public interface CategorySecondDao {
 	 */
 	public void update(CategorySecond categorySecond);
 
+	/**
+	 * 查询所有的二级分类
+	 * @return
+	 */
+	public List<CategorySecond> findAll();
+
 }

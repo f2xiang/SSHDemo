@@ -65,6 +65,11 @@ public class CategorySecondServiceImpl implements CategorySecondService{
 		this.categorySecondDao.update(categorySecond);
 	}
 
+	@Override
+	public List<CategorySecond> findAll() {
+		return this.categorySecondDao.findAll();
+	}
+
 	
 	
 }

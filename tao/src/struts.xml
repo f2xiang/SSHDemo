@@ -83,6 +83,16 @@
         	<result name="edit" type="redirectAction">adminCategorySecond_findAll.action?currentPage=1</result>
         </action>
         
+        <!-- 后台管理的action：商品管理 -->
+        <action name="adminProduct_*" class="adminProductAction" method="{1}">
+        	<result name="findAll">/admin/product/list.jsp</result>
+        	<result name="addUI">/admin/product/add.jsp</result>
+        	<result name="add" type="redirectAction">adminProduct_findAll.action?currentPage=1</result>
+        	<result name="editUI">/admin/product/edit.jsp</result>
+        	<result name="edit" type="redirectAction">adminProduct_findAll.action?currentPage=1</result>
+        	<result name="delete" type="redirectAction">adminProduct_findAll.action?currentPage=1</result>
+        </action>
+        
     </package>
 
 

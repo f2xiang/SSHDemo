@@ -166,10 +166,17 @@
    </bean>
    
    <!-- ==================后台管理模块：二级菜单======================= -->  
-   <!-- 一级菜单管理的action -->
+   <!-- 二级菜单管理的action -->
    <bean id="adminCategorySecondAction" class="com.tjrac.tao.categorysecond.adminaction.AdminCategorySecondAction" scope="prototype">
    		<property name="categorySecondService" ref="categorySecondService"></property>
  		<property name="categoryService" ref="categoryService"></property>
+   </bean>
+   
+   <!-- ==================后台管理模块：商品管理======================= -->  
+   <!-- 商品管理的action -->
+   <bean id="adminProductAction" class="com.tjrac.tao.product.adminaction.AdminProductAction" scope="prototype">
+   		<property name="productService" ref="productService"></property>
+   		<property name="categorySecondService" ref="categorySecondService"></property>
    </bean>
    	
    	

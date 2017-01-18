@@ -63,4 +63,36 @@ public interface ProductDao {
 	public List<Product> findByPageCsid(Integer csid, int beginIndex,
 			int pageCount);
 
+	/**
+	 * 查询所有的商品记录数
+	 * @return
+	 */
+	public int findTotalCount();
+	
+    /**
+     * 分页查询商品数
+     * @param beginIndex
+     * @param pageCount
+     * @return
+     */
+	public List<Product> findAllByPage(int beginIndex, int pageCount);
+
+	/**
+	 * 保存商品
+	 * @param product
+	 */
+	public void add(Product product);
+
+	/**
+	 * 更新商品的信息
+	 * @param product
+	 */
+	public void update(Product product);
+
+	/**
+	 * 删除商品
+	 * @param product
+	 */
+	public void delete(Product product);
+
 }

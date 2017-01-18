@@ -46,6 +46,32 @@ public interface ProductService {
 	 * @return
 	 */
 	public PageBean<Product> findByPageCsid(Integer csid, int currentPage);
+
+	/**
+	 * 分页查询所有商品
+	 * @param currentPage
+	 * @return
+	 */
+	public PageBean<Product> findAll(int currentPage);
+
+	/**
+	 * 添加一个商品
+	 * @param product
+	 */
+	public void add(Product product);
+
+	
+	/**
+	 * 更新商品的信息
+	 * @param product
+	 */
+	public void update(Product product);
+
+	/**
+	 * 删除商品
+	 * @param product
+	 */
+	public void delete(Product product);
 	
 	
 
