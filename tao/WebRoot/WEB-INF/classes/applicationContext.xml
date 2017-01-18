@@ -164,6 +164,13 @@
    <bean id="adminCategoryAction" class="com.tjrac.tao.category.adminaction.AdminCategoryAction" scope="prototype">
    		<property name="categoryService" ref="categoryService"></property>
    </bean>
+   
+   <!-- ==================后台管理模块：二级菜单======================= -->  
+   <!-- 一级菜单管理的action -->
+   <bean id="adminCategorySecondAction" class="com.tjrac.tao.categorysecond.adminaction.AdminCategorySecondAction" scope="prototype">
+   		<property name="categorySecondService" ref="categorySecondService"></property>
+ 		<property name="categoryService" ref="categoryService"></property>
+   </bean>
    	
    	
 </beans>

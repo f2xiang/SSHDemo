@@ -64,13 +64,23 @@
         	<result name="loginSuccess">/admin/home.jsp</result>
         </action>
         
-          <!-- 后台管理的action：一级菜单管理 -->
+        <!-- 后台管理的action：一级菜单管理 -->
         <action name="adminCategory_*" class="adminCategoryAction" method="{1}">
         	<result name="findAll">/admin/category/list.jsp</result>
         	<result name="save" type="redirectAction">adminCategory_findAll</result>
         	<result name="delete" type="redirectAction">adminCategory_findAll</result>
         	<result name="editUI">/admin/category/edit.jsp</result>
         	<result name="edit" type="redirectAction">adminCategory_findAll</result>
+        </action>
+          
+        <!-- 后台管理的action：二级菜单管理 -->
+        <action name="adminCategorySecond_*" class="adminCategorySecondAction" method="{1}">
+        	<result name="findAll">/admin/categorysecond/list.jsp</result>
+        	<result name="addUI">/admin/categorysecond/add.jsp</result>
+        	<result name="add" type="redirectAction">adminCategorySecond_findAll.action?currentPage=1</result>
+        	<result name="delete" type="redirectAction">adminCategorySecond_findAll.action?currentPage=1</result>
+        	<result name="editUI">/admin/categorysecond/edit.jsp</result>
+        	<result name="edit" type="redirectAction">adminCategorySecond_findAll.action?currentPage=1</result>
         </action>
         
     </package>
