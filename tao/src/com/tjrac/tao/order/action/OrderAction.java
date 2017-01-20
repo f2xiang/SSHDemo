@@ -212,4 +212,16 @@ public class OrderAction extends ActionSupport implements ModelDriven<Order>{
 		this.addActionMessage("订单付款成功！ 订单编号："+r6_Order+"付款金额："+r3_Amt);
 		return "msg";
 	}
+	
+	
+	/**
+	 * 用户确认收货，订单状态修改
+	 * @return
+	 */
+	public String updateState(){
+		Order findOrder = this.orderService.findByOid(order.getOid());
+		findOrder.setState(4);
+		this.orderService.updateOrder(findOrder);
+		return "updateState";
+	}
 }

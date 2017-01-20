@@ -1,6 +1,9 @@
 package com.tjrac.tao.order.service;
 
+import java.util.List;
+
 import com.tjrac.tao.order.vo.Order;
+import com.tjrac.tao.order.vo.OrderItem;
 import com.tjrac.tao.util.PageBean;
 
 /**
@@ -36,5 +39,19 @@ public interface OrderService {
 	 * @param findOrder
 	 */
 	public void updateOrder(Order findOrder);
+
+	/**
+	 * 分页查询所有订单
+	 * @param currentPage
+	 * @return
+	 */
+	public PageBean<Order> findAll(int currentPage);
+
+	/**
+	 * 根据订单的id查询订单项
+	 * @param oid
+	 * @return
+	 */
+	public List<OrderItem> findOrderItem(Integer oid);
 
 }

@@ -59,7 +59,10 @@
 								已付款
 							</s:if>
 							<s:if test="#order.state == 3">
-								<s:a href="#"><font color="red"> 确认收货 </font></s:a>	
+								<s:a namespace="/" action="order_updateState">
+									<s:param name="oid" value="%{#order.oid}"></s:param>
+									<font color="red"> 确认收货 </font>
+								</s:a>	
 							</s:if>
 							<s:if test="#order.state == 4">
 								交易完成

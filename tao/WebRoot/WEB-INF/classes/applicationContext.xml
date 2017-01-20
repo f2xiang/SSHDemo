@@ -178,6 +178,12 @@
    		<property name="productService" ref="productService"></property>
    		<property name="categorySecondService" ref="categorySecondService"></property>
    </bean>
+   
+   <!-- ==================后台管理模块：订单管理======================= -->  
+   <!-- 订单管理的action -->
+   <bean id="adminOrderAction" class="com.tjrac.tao.order.adminaction.AdminOrderAction" scope="prototype">
+   		<property name="orderService" ref="orderService"></property>
+   </bean>
    	
    	
 </beans>
