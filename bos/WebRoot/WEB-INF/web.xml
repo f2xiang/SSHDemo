@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="2.5" 
+	xmlns="http://java.sun.com/xml/ns/javaee" 
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee 
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+	
+	<!-- 中文乱码 -->
+	<filter>
+		<filter-name>characterEncodingFilter</filter-name>
+		<filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+		<init-param>
+			<param-name>encoding</param-name>
+			<param-value>UTF-8</param-value>
+		</init-param>
+	</filter>
+	<filter-mapping>
+		<filter-name>characterEncodingFilter</filter-name>
+		<url-pattern>/*</url-pattern>
+	</filter-mapping>
+	
+	
+	<!-- 延迟关闭session 这样就能从持久层把数据取出来了  不延迟关闭session的话 脱管层不能取出数据 -->
+  	<filter>
+  	    <filter-name>openSession</filter-name>
+  	    <filter-class>org.springframework.orm.hibernate3.support.OpenSessionInViewFilter</filter-class>
+  	</filter>
+    <filter-mapping>
+        <filter-name>openSession</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+  
+  	<!-- 1、 确定spring 配置文件的位置  一上来就要加载spring容器 -->
+	<context-param>
+	     <param-name>contextConfigLocation</param-name>
+	     <param-value>classpath:applicationContext.xml</param-value>
+	</context-param>
+	
+	<!-- 2、Spring的监听器   ContextLoaderListener-->
+	<listener>
+	      <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	
+	<!-- 3、struts 的配置   StrutsPrepareAndExecuteFilter-->
+	<filter>
+	      <filter-name>struts2</filter-name>
+	      <filter-class>org.apache.struts2.dispatcher.ng.filter.StrutsPrepareAndExecuteFilter</filter-class>
+	</filter>
+    <filter-mapping>
+          <filter-name>struts2</filter-name>
+          <url-pattern>/*</url-pattern>
+          <dispatcher>REQUEST</dispatcher>
+          <dispatcher>FORWARD</dispatcher>
+    </filter-mapping>
+	
+	
+  <display-name></display-name>	
+  <welcome-file-list>
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>

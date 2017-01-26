@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC
+	"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+	"http://struts.apache.org/dtds/struts-2.3.dtd">
+
+<struts>
+
+    <constant name="struts.devMode" value="true" />
+    <constant name="struts.ui.theme" value="simple"></constant>
+    <package name="common" extends="struts-default">
+    	<!-- 拦截器的声明 -->
+    	<interceptors>
+    		<interceptor name="loginInterceptor" class="com.tjrac.bos.web.interceptor.LoginInterceptor"></interceptor>
+    		<interceptor-stack name="loginStack">
+    			<interceptor-ref name="loginInterceptor">
+    				<param name="excludeMethods">login</param>
+    			</interceptor-ref>
+    			<interceptor-ref name="defaultStack"></interceptor-ref>
+    		</interceptor-stack>
+    	</interceptors>
+    
+    	<!-- 默认拦截器的引用 -->
+    	<default-interceptor-ref name="loginStack"></default-interceptor-ref>
+    	
+    	<!-- 全局的结果集 -->
+    	<global-results>
+    		<result name="login">/login.jsp</result>
+    	</global-results>
+    	<!-- 统一页面的访问 -->
+    	<action name="page_*_*">
+    		<result type="dispatcher">/WEB-INF/pages/{1}/{2}.jsp</result>
+    	</action>
+    	
+    	<!-- 用户的action -->
+    	<action name="userAction_*" class="userAction" method="{1}">
+    		<result name="loginsuccess">/WEB-INF/pages/common/index.jsp</result>
+    	</action>
+    </package>
+    
+    
+	
+</struts>
