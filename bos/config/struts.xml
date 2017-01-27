@@ -35,6 +35,11 @@
     	<action name="userAction_*" class="userAction" method="{1}">
     		<result name="loginsuccess">/WEB-INF/pages/common/index.jsp</result>
     	</action>
+    	
+    	<!-- 取派员的action -->
+    	<action name="staffAction_*" class="staffAction" method="{1}">
+    		<result name="list">/WEB-INF/pages/base/staff.jsp</result>
+    	</action>
     </package>
     
     

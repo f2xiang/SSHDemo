@@ -45,10 +45,9 @@
 		$.ajax({
 			url : '${pageContext.request.contextPath}/json/menu.json',
 			type : 'POST',
-			dataType : 'text',
+			dataType : 'json',
 			success : function(data) {
-				var zNodes = eval("(" + data + ")");
-				$.fn.zTree.init($("#treeMenu"), setting, zNodes);
+				$.fn.zTree.init($("#treeMenu"), setting, data);
 			},
 			error : function(msg) {
 				alert('菜单加载异常!');
