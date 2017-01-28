@@ -3,6 +3,7 @@ package com.tjrac.bos.dao.base;
 import java.io.Serializable;
 import java.util.List;
 
+import com.tjrac.bos.domain.Region;
 import com.tjrac.bos.utils.PageBean;
 
 /**
@@ -17,6 +18,8 @@ public interface BaseDao<T> {
 	public void delete(T entity);
 	
 	public void update(T entity);
+	
+	public void saveOrUpdate(T entity);
 	
 	public T findById(Serializable id);
 	

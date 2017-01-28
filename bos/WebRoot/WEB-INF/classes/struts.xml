@@ -40,6 +40,11 @@
     	<action name="staffAction_*" class="staffAction" method="{1}">
     		<result name="list">/WEB-INF/pages/base/staff.jsp</result>
     	</action>
+    	
+    	<!-- 区域的action -->
+    	<action name="regionAction_*" class="regionAction" method="{1}">
+    		<result name="list">/WEB-INF/pages/base/region.jsp</result>
+    	</action>
     </package>
     
     
