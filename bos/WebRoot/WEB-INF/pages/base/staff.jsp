@@ -33,7 +33,7 @@
 	}
 	
 	function doView(){
-		alert("查看...");
+		$('#searchWindow').window("open");
 	}
 	
 	function doDelete(){
@@ -56,7 +56,18 @@
 	}
 	
 	function doRestore(){
-		alert("将取派员还原...");
+		var rows = $("#grid").datagrid("getSelections");
+		if(rows.length == 0){
+			$.messager.alert("提示信息","请选择要还原的数据","warning");
+		}else{
+			var array = new Array();
+			for(var i = 0; i < rows.length; i++){
+				var id = rows[i].id;
+				array.push(id);
+			}
+			var ids = array.join(",");
+			window.location.href = '${pageContext.request.contextPath }/staffAction_restore.action?ids='+ids;
+		}
 	}
 	//工具栏
 	var toolbar = [ {
@@ -171,6 +182,17 @@
 	        height: 400,
 	        resizable:false
 	    });
+	    
+	    // 查询分区
+		$('#searchWindow').window({
+	        title: '查询分区',
+	        width: 400,
+	        modal: true,
+	        shadow: true,
+	        closed: true,
+	        height: 400,
+	        resizable:false
+	    });
 		
 	});
 
@@ -214,6 +236,34 @@
 			}
 		});
 	});
+	
+	
+	 $(function(){
+   		$.fn.serializeJson=function(){  
+           var serializeObj={};  
+           var array=this.serializeArray();
+           $(array).each(function(){  
+               if(serializeObj[this.name]){  
+                   if($.isArray(serializeObj[this.name])){  
+                       serializeObj[this.name].push(this.value);  
+                   }else{  
+                       serializeObj[this.name]=[serializeObj[this.name],this.value];  
+                   }  
+               }else{  
+                   serializeObj[this.name]=this.value;   
+               }  
+           });  
+           return serializeObj;  
+       }; 
+       	//绑定事件
+        $("#btn").click(function(){
+        	var p = $("#searchForm").serializeJson();
+        	//重新发起ajax请求 提交参数
+			$("#grid").datagrid("load", p);
+			//关闭查询窗口
+			$("searchWindow").window("close");
+		});
+    });
 	
 </script>	
 </head>
@@ -304,6 +354,36 @@
 						</td>
 					</tr>
 					</table>
+			</form>
+		</div>
+	</div>
+	
+	
+	
+	<!-- 查询分区 -->
+	<div class="easyui-window" title="查询分区窗口" id="searchWindow" collapsible="false" minimizable="false" maximizable="false" style="top:20px;left:200px">
+		<div style="overflow:auto;padding:5px;" border="false">
+			<form id="searchForm">
+				<table class="table-edit" width="80%" align="center">
+					<tr class="title">
+						<td colspan="2">查询条件</td>
+					</tr>
+					<tr>
+						<td>姓名</td>
+						<td><input type="text" name="name"/></td>
+					</tr>
+					<tr>
+						<td>取派标准</td>
+						<td><input type="text" name="standard"/></td>
+					</tr>
+					<tr>
+						<td>所属单位</td>
+						<td><input type="text" name="station"/></td>
+					</tr>
+					<tr>
+						<td colspan="2"><a id="btn" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查询</a> </td>
+					</tr>
+				</table>
 			</form>
 		</div>
 	</div>

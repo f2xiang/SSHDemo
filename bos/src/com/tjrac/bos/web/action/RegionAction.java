@@ -8,10 +8,12 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
+import javax.servlet.ServletOutputStream;
 
 import net.sf.json.JSONArray;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.ss.usermodel.Row;
@@ -22,6 +24,7 @@ import org.springframework.stereotype.Controller;
 
 import com.tjrac.bos.domain.Region;
 import com.tjrac.bos.service.RegionService;
+import com.tjrac.bos.utils.FileUtils;
 import com.tjrac.bos.utils.PageBean;
 import com.tjrac.bos.utils.PinYin4jUtils;
 import com.tjrac.bos.web.action.base.BaseAction;
@@ -135,6 +138,48 @@ public class RegionAction extends BaseAction<Region>{
 	}
 
 
+	
+	/**
+	 * 导出成excel文件
+	 * @throws IOException 
+	 */
+	public String exportXls() throws IOException{
+		List<Region> rList = this.regionService.findAll();
+		
+		HSSFWorkbook workbook = new HSSFWorkbook();
+		HSSFSheet sheet = workbook.createSheet("区域数据");
+		HSSFRow headerRow = sheet.createRow(0);
+		headerRow.createCell(0).setCellValue("区域编号");
+		headerRow.createCell(1).setCellValue("省市区");
+		headerRow.createCell(2).setCellValue("邮编");
+		headerRow.createCell(3).setCellValue("简码");
+		headerRow.createCell(4).setCellValue("城市编码");
+		
+		for (Region region : rList) {
+			HSSFRow dataRow = sheet.createRow(sheet.getLastRowNum() + 1);
+			dataRow.createCell(0).setCellValue(region.getId());
+			dataRow.createCell(1).setCellValue(region.getProvince() + region.getCity() + region.getDistrict());
+			dataRow.createCell(2).setCellValue(region.getPostcode());
+			dataRow.createCell(3).setCellValue(region.getShortcode());
+			dataRow.createCell(4).setCellValue(region.getCitycode());
+		}
+		
+		String filename = "abc.xls";
+		//为了防止下载文件中文名称乱码 这里用了一个工具类
+		String agent = ServletActionContext.getRequest().getHeader("User-Agent");
+		filename = FileUtils.encodeDownloadFilename(filename, agent);
+		
+		//一个流 两个头 （提供下载）
+		ServletOutputStream outputStream = ServletActionContext.getResponse().getOutputStream();
+		String contentType = ServletActionContext.getServletContext().getMimeType(filename);
+		ServletActionContext.getResponse().setContentType(contentType);
+		ServletActionContext.getResponse().setHeader("content-disposition", "attchment;filename="+filename);
+		
+		workbook.write(outputStream);
+		
+		
+		return NONE;
+	}
 
 	
 }

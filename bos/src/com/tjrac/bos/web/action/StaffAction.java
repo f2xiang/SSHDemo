@@ -7,8 +7,10 @@ import javax.annotation.Resource;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 
+import org.apache.commons.lang3.StringUtils;
 import org.apache.struts2.ServletActionContext;
 import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -40,6 +42,24 @@ public class StaffAction extends BaseAction<Staff>{
 	 * @throws IOException 
 	 */
 	public String pageQuery() throws IOException{
+		
+		DetachedCriteria detachedCriteria2 = pageBean.getDetachedCriteria();
+		
+		String name = model.getName();
+		if(StringUtils.isNotBlank(name)){
+			detachedCriteria2.add(Restrictions.like("name", "%"+name+"%"));
+		}
+		
+		String standard = model.getStandard();
+		if(StringUtils.isNotBlank(standard)){
+			detachedCriteria2.add(Restrictions.like("standard", "%"+standard+"%"));
+		}
+		
+		String station = model.getStation();
+		if(StringUtils.isNotBlank(station)){
+			detachedCriteria2.add(Restrictions.like("station", "%"+station+"%"));
+		}
+		
 		this.staffService.pageQuery(pageBean);
 		//返回json数据
 		this.writePageBean2Json(pageBean, new String[]{"currentPage", "pageSize", "detachedCriteria" });
@@ -65,6 +85,17 @@ public class StaffAction extends BaseAction<Staff>{
 		this.staffService.deleteBatch(ids);
 		return "list";
 	}
+	
+	
+	/**
+	 * 还原已经删除的员工
+	 * @return
+	 */
+	public String restore(){
+		this.staffService.restoreBatch(ids);
+		return "list";
+	}
+	
 	
 	/**
 	 * 编辑

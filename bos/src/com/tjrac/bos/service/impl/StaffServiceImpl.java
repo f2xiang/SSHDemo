@@ -33,7 +33,7 @@ public class StaffServiceImpl implements StaffService{
 	public void deleteBatch(String ids) {
 		String[] staffId = ids.split(",");
 		for (String id : staffId) {
-			this.staffDao.update("staff.delete", id);
+			this.staffDao.update("staff.update", "1", id);
 		}
 	}
 
@@ -45,6 +45,14 @@ public class StaffServiceImpl implements StaffService{
 	@Override
 	public Staff findById(String id) {
 		return this.staffDao.findById(id);
+	}
+
+	@Override
+	public void restoreBatch(String ids) {
+		String[] staffId = ids.split(",");
+		for (String id : staffId) {
+			this.staffDao.update("staff.update", "0", id);
+		}
 	}
 	
 	

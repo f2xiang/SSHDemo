@@ -33,7 +33,7 @@
             <one-to-many class="com.tjrac.bos.domain.Decidedzone" />
         </set>
     </class>
-    <query name="staff.delete">
-    	UPDATE Staff SET deltag = '1' WHERE id = ?
+    <query name="staff.update">
+    	UPDATE Staff SET deltag = ? WHERE id = ?
     </query>
 </hibernate-mapping>

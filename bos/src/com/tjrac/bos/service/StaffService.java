@@ -25,6 +25,17 @@ public interface StaffService {
 	 */
 	public void update(Staff staff);
 
+	/**
+	 * 通过id找到员工
+	 * @param id
+	 * @return
+	 */
 	public Staff findById(String id);
+
+	/**
+	 * 逻辑还原：将删除的标志位为1的员工 改为0
+	 * @param ids
+	 */
+	public void restoreBatch(String ids);
 
 }

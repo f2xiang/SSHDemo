@@ -42,6 +42,10 @@
 		alert("删除...");
 	}
 	
+	//文件导出
+	function doExport(){
+		window.location.href="${pageContext.request.contextPath }/regionAction_exportXls.action";
+	}
 	//工具栏
 	var toolbar = [ {
 		id : 'button-edit',	
@@ -62,6 +66,11 @@
 		id : 'button-import',
 		text : '导入',
 		iconCls : 'icon-redo'
+	},{
+		id : 'button-export',
+		text : '导出',
+		iconCls : 'icon-undo',
+		handler : doExport
 	}];
 	// 定义列
 	var columns = [ [ {
