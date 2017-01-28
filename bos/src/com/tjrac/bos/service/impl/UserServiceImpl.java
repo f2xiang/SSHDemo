@@ -17,11 +17,6 @@ public class UserServiceImpl implements UserService{
 	@Resource
 	private UserDao userDao;
 	
-	public void setUserDao(UserDao userDao) {
-		this.userDao = userDao;
-	}
-	
-	
 	
 	@Override
 	public User login(User model) {

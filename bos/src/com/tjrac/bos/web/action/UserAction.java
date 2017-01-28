@@ -18,14 +18,6 @@ import com.tjrac.bos.web.action.base.BaseAction;
 @Scope("prototype")
 public class UserAction extends BaseAction<User>{
 	
-	@Resource
-	private UserService userService;
-	
-	public void setUserService(UserService userService) {
-		this.userService = userService;
-	}
-	
-	
 	//接收验证码
 	private String checkcode;
 	
@@ -45,7 +37,7 @@ public class UserAction extends BaseAction<User>{
 		String checkcode2 = (String) ServletActionContext.getRequest().getSession().getAttribute("key");
 		if(StringUtils.isNotBlank(checkcode) && checkcode.equalsIgnoreCase(checkcode2)){
 			//验证码正确
-			User finduser =  userService.login(model);
+			User finduser =  this.userService.login(model);
 			if(finduser != null){
 				//登陆成功 设置成功标志
 				ServletActionContext.getRequest().getSession().setAttribute("user", finduser);

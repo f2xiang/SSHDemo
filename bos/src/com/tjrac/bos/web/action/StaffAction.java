@@ -21,13 +21,6 @@ import com.tjrac.bos.web.action.base.BaseAction;
 @Scope("prototype")
 public class StaffAction extends BaseAction<Staff>{
 	
-	@Resource
-	private StaffService staffService;
-	
-	public void setStaffService(StaffService staffService) {
-		this.staffService = staffService;
-	}
-	
 	
 	/**
 	 * ÃÌº”»°≈…‘±

@@ -9,6 +9,8 @@ import java.util.List;
 
 import javax.annotation.Resource;
 
+import net.sf.json.JSONArray;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
@@ -27,14 +29,6 @@ import com.tjrac.bos.web.action.base.BaseAction;
 @Controller
 @Scope("prototype")
 public class RegionAction extends BaseAction<Region>{
-	
-	@Resource
-	private RegionService regionService;
-	
-	public void setRegionService(RegionService regionService) {
-		this.regionService = regionService;
-	}
-	
 	
 	//接收文件
 	private File myFile;
@@ -112,7 +106,35 @@ public class RegionAction extends BaseAction<Region>{
 	 */
 	public String pageQuery() throws IOException{
 		this.regionService.pageQuery(pageBean);
-		this.writePageBean2Json(pageBean, new String[]{"currentPage", "pageSize", "detachedCriteria" });
+		this.writePageBean2Json(pageBean, new String[]{"currentPage", "pageSize", "detachedCriteria", "subareas" });
 		return NONE;
 	}
+	
+	
+	//combobox默认模糊查询的参数
+	private String q;
+	
+	public void setQ(String q) {
+		this.q = q;
+	}
+	
+	/**
+	 * 查询所有ajax
+	 * @return
+	 * @throws IOException 
+	 */
+	public String findAll() throws IOException{
+		List<Region> rList = null;
+		if(StringUtils.isNotBlank(q)){
+			rList = this.regionService.findByQ(q);
+		}else{
+			rList = this.regionService.findAll();
+		}
+		this.writeList2Json(rList, new String[]{"subareas"});
+		return NONE;
+	}
+
+
+
+	
 }

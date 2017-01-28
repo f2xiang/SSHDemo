@@ -19,6 +19,11 @@ public class Region implements java.io.Serializable {
 	private String shortcode;
 	private String citycode;
 	private Set subareas = new HashSet(0);
+	
+	//通过get方法把这个数据转成json显示到页面的combobox
+	public String getName(){
+		return province + city + district;
+	}
 
 	// Constructors
 

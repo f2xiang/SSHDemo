@@ -18,10 +18,7 @@ public class RegionServiceImpl implements RegionService{
 	
 	@Resource
 	private RegionDao regionDao;
-	
-	public void setRegionDao(RegionDao regionDao) {
-		this.regionDao = regionDao;
-	}
+
 
 	@Override
 	public void saveBatch(List<Region> list) {
@@ -33,6 +30,16 @@ public class RegionServiceImpl implements RegionService{
 	@Override
 	public void pageQuery(PageBean pageBean) {
 		this.regionDao.pageQuery(pageBean);
+	}
+
+	@Override
+	public List<Region> findAll() {
+		return this.regionDao.findAll();
+	}
+
+	@Override
+	public List<Region> findByQ(String q) {
+		return this.regionDao.findByQ(q);
 	}
 	
 	

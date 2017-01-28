@@ -45,6 +45,11 @@
     	<action name="regionAction_*" class="regionAction" method="{1}">
     		<result name="list">/WEB-INF/pages/base/region.jsp</result>
     	</action>
+    	
+    	<!-- 分区的action -->
+    	<action name="subareaAction_*" class="subareaAction" method="{1}">
+    		<result name="list">/WEB-INF/pages/base/subarea.jsp</result>
+    	</action>
     </package>
     
     

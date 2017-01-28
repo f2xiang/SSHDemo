@@ -3,7 +3,11 @@ package com.tjrac.bos.web.action.base;
 import java.io.IOException;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
+import java.util.List;
 
+import javax.annotation.Resource;
+
+import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
 import net.sf.json.JsonConfig;
 
@@ -12,6 +16,11 @@ import org.hibernate.criterion.DetachedCriteria;
 
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
+import com.tjrac.bos.domain.Region;
+import com.tjrac.bos.service.RegionService;
+import com.tjrac.bos.service.StaffService;
+import com.tjrac.bos.service.SubareaService;
+import com.tjrac.bos.service.UserService;
 import com.tjrac.bos.utils.PageBean;
 
 /**
@@ -21,6 +30,21 @@ import com.tjrac.bos.utils.PageBean;
  *
  */
 public class BaseAction<T> extends ActionSupport implements ModelDriven<T>{
+	
+	//----------service-----------
+	@Resource
+	protected UserService userService;
+	
+	@Resource
+	protected SubareaService subareaService;
+	
+	@Resource
+	protected StaffService staffService;
+	
+	@Resource
+	protected RegionService regionService;
+	
+	
 	
 	//-----------分页数据----------
 	protected PageBean pageBean = new PageBean();
@@ -62,7 +86,12 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T>{
 		}
 	}
 
-	
+	/**
+	 * 把获得的分页数据写成json数据返回
+	 * @param pageBean
+	 * @param excludes
+	 * @throws IOException
+	 */
 	public void writePageBean2Json(PageBean pageBean, String [] excludes) throws IOException{
 		JsonConfig jsonConfig = new JsonConfig();
 		jsonConfig.setExcludes(excludes);//设置不包含的数据
@@ -72,5 +101,22 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T>{
 		String json = jsonObject.toString();
 		ServletActionContext.getResponse().setContentType("text/json;charset=UTF-8");
 		ServletActionContext.getResponse().getWriter().print(json);
+	}
+	
+	
+	/**
+	 * 把获得的list写成json返回去
+	 * @param rList
+	 * @param strings
+	 * @throws IOException 
+	 */
+	public void writeList2Json(List rList, String[] excludes) throws IOException {
+		JsonConfig jsonConfig = new JsonConfig();
+		jsonConfig.setExcludes(excludes);
+		
+		String json = JSONArray.fromObject(rList, jsonConfig).toString();
+		ServletActionContext.getResponse().setContentType("text/json;charset=UTF-8");
+		ServletActionContext.getResponse().getWriter().print(json);
+		
 	}
 }

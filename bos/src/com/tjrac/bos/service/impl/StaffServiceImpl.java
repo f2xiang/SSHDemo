@@ -17,9 +17,7 @@ public class StaffServiceImpl implements StaffService{
 	@Resource
 	private StaffDao staffDao;
 	
-	public void setStaffDao(StaffDao staffDao) {
-		this.staffDao = staffDao;
-	}
+	
 
 	@Override
 	public void add(Staff model) {
