@@ -109,7 +109,7 @@ public class RegionAction extends BaseAction<Region>{
 	 */
 	public String pageQuery() throws IOException{
 		this.regionService.pageQuery(pageBean);
-		this.writePageBean2Json(pageBean, new String[]{"currentPage", "pageSize", "detachedCriteria", "subareas" });
+		this.writePageBean2Json(pageBean, new String[]{"currentPage", "pageSize", "detachedCriteria", "subareas", "staff" });
 		return NONE;
 	}
 	

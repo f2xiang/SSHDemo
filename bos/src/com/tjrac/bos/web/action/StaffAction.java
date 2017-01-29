@@ -1,22 +1,15 @@
 package com.tjrac.bos.web.action;
 
 import java.io.IOException;
-
-import javax.annotation.Resource;
-
-import net.sf.json.JSONObject;
-import net.sf.json.JsonConfig;
+import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
-import org.apache.struts2.ServletActionContext;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
 import com.tjrac.bos.domain.Staff;
-import com.tjrac.bos.service.StaffService;
-import com.tjrac.bos.utils.PageBean;
 import com.tjrac.bos.web.action.base.BaseAction;
 
 @Controller
@@ -115,5 +108,19 @@ public class StaffAction extends BaseAction<Staff>{
 		
 		this.staffService.update(staff);
 		return "list";
+	}
+	
+	
+	
+	/**
+	 * 查询所有有用的取派员--删除位为1的不算(ajax)
+	 * @return
+	 * @throws IOException 
+	 */
+	public String findAll() throws IOException{
+		List<Staff> sList = this.staffService.findAll();
+		//在下拉框中显示  除了id 和 name  其他的都不需要
+		this.writeList2Json(sList, new String[]{"decidedzones", "telephone", "haspda", "deltag", "station", "standard"});
+		return NONE;
 	}
 }

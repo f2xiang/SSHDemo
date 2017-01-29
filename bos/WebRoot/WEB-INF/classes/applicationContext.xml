@@ -50,6 +50,12 @@
 	
 	<tx:annotation-driven/>
 	
-    
+	<!-- hessian 配置远程服务的代理对象 -->
+    <bean id="customerService" class="org.springframework.remoting.caucho.HessianProxyFactoryBean">
+		<!-- 注入接口的访问类型 -->
+		<property name="serviceInterface" value="com.tjrac.crm.service.CustomerService"/>
+		<!-- 服务访问的路径 -->
+		<property name="serviceUrl" value="http://localhost:8080/bos_crm/remoting/customer"/>
+	</bean>
     
 </beans>

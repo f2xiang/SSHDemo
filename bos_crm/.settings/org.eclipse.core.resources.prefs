@@ -1,0 +1,6 @@
+#Sun Jan 29 20:08:53 CST 2017
+eclipse.preferences.version=1
+encoding//src/com/tjrac/crm/domain/Customer.java=UTF-8
+encoding//src/com/tjrac/crm/service/CustomerService.java=UTF-8
+encoding//src/com/tjrac/crm/service/impl/CustomerServiceImpl.java=UTF-8
+encoding//src/com/tjrac/crm/utils/HibernateUtils.java=UTF-8

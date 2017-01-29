@@ -1,5 +1,7 @@
 package com.tjrac.bos.service;
 
+import java.util.List;
+
 import com.tjrac.bos.domain.Staff;
 import com.tjrac.bos.utils.PageBean;
 
@@ -37,5 +39,11 @@ public interface StaffService {
 	 * @param ids
 	 */
 	public void restoreBatch(String ids);
+
+	/**
+	 * 查询所有 除去删除位为1的派送员
+	 * @return
+	 */
+	public List<Staff> findAll();
 
 }

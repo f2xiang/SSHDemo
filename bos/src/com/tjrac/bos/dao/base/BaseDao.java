@@ -3,6 +3,8 @@ package com.tjrac.bos.dao.base;
 import java.io.Serializable;
 import java.util.List;
 
+import org.hibernate.criterion.DetachedCriteria;
+
 import com.tjrac.bos.domain.Region;
 import com.tjrac.bos.utils.PageBean;
 
@@ -33,4 +35,11 @@ public interface BaseDao<T> {
 	 * @param pageBean
 	 */
 	public void pageQuery(PageBean pageBean);
+	
+	/**
+	 * 带有查询条件的查询
+	 * @param detachedCriteria
+	 * @return
+	 */
+	public List<T> findByCriteria(DetachedCriteria detachedCriteria);
 }

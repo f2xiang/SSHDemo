@@ -1,7 +1,11 @@
 package com.tjrac.bos.service.impl;
 
+import java.util.List;
+
 import javax.annotation.Resource;
 
+import org.hibernate.criterion.DetachedCriteria;
+import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -53,6 +57,14 @@ public class StaffServiceImpl implements StaffService{
 		for (String id : staffId) {
 			this.staffDao.update("staff.update", "0", id);
 		}
+	}
+
+	@Override
+	public List<Staff> findAll() {
+		//查询deltag为0的派件员
+		DetachedCriteria detachedCriteria = DetachedCriteria.forClass(Staff.class);
+		detachedCriteria.add(Restrictions.eq("deltag", "0"));
+		return this.staffDao.findByCriteria(detachedCriteria);
 	}
 	
 	

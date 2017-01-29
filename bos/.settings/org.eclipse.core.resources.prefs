@@ -1,4 +1,4 @@
-#Sat Jan 28 19:21:37 CST 2017
+#Sun Jan 29 20:36:17 CST 2017
 eclipse.preferences.version=1
 encoding//src/com/tjrac/bos/domain/Decidedzone.java=UTF-8
 encoding//src/com/tjrac/bos/domain/Region.java=UTF-8
@@ -6,3 +6,5 @@ encoding//src/com/tjrac/bos/domain/Staff.java=UTF-8
 encoding//src/com/tjrac/bos/domain/Subarea.java=UTF-8
 encoding//src/com/tjrac/bos/utils/FileUtils.java=UTF-8
 encoding//src/com/tjrac/bos/utils/PinYin4jUtils.java=UTF-8
+encoding//src/com/tjrac/crm/domain/Customer.java=UTF-8
+encoding//src/com/tjrac/crm/service/CustomerService.java=UTF-8

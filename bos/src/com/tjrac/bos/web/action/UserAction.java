@@ -1,6 +1,7 @@
 package com.tjrac.bos.web.action;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.annotation.Resource;
 
@@ -13,10 +14,13 @@ import com.tjrac.bos.domain.User;
 import com.tjrac.bos.service.UserService;
 import com.tjrac.bos.utils.MyMd5Util;
 import com.tjrac.bos.web.action.base.BaseAction;
+import com.tjrac.crm.domain.Customer;
+import com.tjrac.crm.service.CustomerService;
 
 @Controller
 @Scope("prototype")
 public class UserAction extends BaseAction<User>{
+	
 	
 	//接收验证码
 	private String checkcode;

@@ -17,11 +17,13 @@ import org.hibernate.criterion.DetachedCriteria;
 import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.tjrac.bos.domain.Region;
+import com.tjrac.bos.service.DecidedzoneService;
 import com.tjrac.bos.service.RegionService;
 import com.tjrac.bos.service.StaffService;
 import com.tjrac.bos.service.SubareaService;
 import com.tjrac.bos.service.UserService;
 import com.tjrac.bos.utils.PageBean;
+import com.tjrac.crm.service.CustomerService;
 
 /**
  * 通用action实现
@@ -44,7 +46,11 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T>{
 	@Resource
 	protected RegionService regionService;
 	
+	@Resource
+	protected DecidedzoneService decidedzoneService;
 	
+	@Resource
+	protected CustomerService customerService;
 	
 	//-----------分页数据----------
 	protected PageBean pageBean = new PageBean();

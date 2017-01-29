@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project-module
+  type="WEB"
+  name="bos_crm"
+  id="myeclipse.1485691093319"
+  context-root="/bos_crm"
+  j2ee-spec="5.0"
+  archive="bos_crm.war">
+  <attributes>
+    <attribute name="webrootdir" value="WebRoot" />
+  </attributes>
+</project-module>
+

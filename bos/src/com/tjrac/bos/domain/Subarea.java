@@ -18,6 +18,11 @@ public class Subarea implements java.io.Serializable {
 
 	// Constructors
 
+	public String getSubareaid(){
+		return id;
+	}
+	
+	
 	/** default constructor */
 	public Subarea() {
 	}

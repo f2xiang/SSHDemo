@@ -123,4 +123,17 @@ public class SubareaAction extends BaseAction<Subarea>{
 		return NONE;
 	}
 	
+	
+	
+	
+	/**
+	 * ajax请求  查询 未被关联到定区的分区
+	 * @return
+	 * @throws IOException 
+	 */
+	public String findAll() throws IOException{
+		List<Subarea> sList = this.subareaService.findAllNotAssociation();
+		this.writeList2Json(sList, new String[]{"decidedzone", "region", "startnum", "endnum", "single"});
+		return NONE;
+	}
 }
