@@ -55,7 +55,7 @@ public class StaffAction extends BaseAction<Staff>{
 		
 		this.staffService.pageQuery(pageBean);
 		//·µ»ØjsonÊý¾Ý
-		this.writePageBean2Json(pageBean, new String[]{"currentPage", "pageSize", "detachedCriteria" });
+		this.writePageBean2Json(pageBean, new String[]{"currentPage", "pageSize", "detachedCriteria", "decidedzones" });
 		
 		return NONE;
 	}

@@ -43,8 +43,45 @@
 		$('#searchWindow').window("open");
 	}
 	
+	var id;
+	
 	function doAssociations(){
-		$('#customerWindow').window('open');
+		//判断是否选中一个定区
+		var rows = $("#grid").datagrid("getSelections");
+		id = rows[0].id;
+		if(rows.length == 1){
+			$('#customerWindow').window('open');
+			$("#noassociationSelect").empty();
+			$("#associationSelect").empty();
+			
+			//发送ajax 获得 没有关联定区的客户
+			var url1 = "${pageContext.request.contextPath }/decidedzoneAction_findNoAssociationCustomers.action";
+			$.post(url1,{},function(data){
+				//遍历解析json 填充到下拉框
+				for(var i = 0; i < data.length; i++){
+					var id = data[i].id;
+					var name = data[i].name;
+					$("#noassociationSelect").append("<option value="+id+">"+name+"</option>")
+				}
+				
+			},"json");
+			
+			//发送ajax 获得 已经关联定区的客户
+			var url2 = "${pageContext.request.contextPath }/decidedzoneAction_findHasAssociationCustomers.action";
+			$.post(url2,{"id":rows[0].id},function(data){
+				//遍历解析json 填充到下拉框
+				for(var i = 0; i < data.length; i++){
+					var id = data[i].id;
+					var name = data[i].name;
+					$("#associationSelect").append("<option value="+id+">"+name+"</option>")
+				}
+				
+			},"json");
+			
+			
+		}else{
+			$.messager.alert("提示信息","请选择一个定区操作","info");
+		}
 	}
 	
 	//工具栏
@@ -256,6 +293,25 @@
 			}
 		});
 	});
+	
+	
+	//客户左右移动的按钮
+	$(function(){
+		$("#toRight").click(function(){
+			$("#associationSelect").append($("#noassociationSelect option:selected"));
+		});
+		$("#toLeft").click(function(){
+			$("#noassociationSelect").append($("#associationSelect option:selected"));
+		});
+		//关联客户按钮
+		$("#associationBtn").click(function(){
+		//下拉框默认提交一个 所以要提交表单之前 把下拉框的所有选项选中
+			$("#associationSelect").attr("selected","selected");
+			//设置定区的id
+			$("input[name=id]").val(id);
+			$("#customerForm").submit();
+		});
+	});
 </script>	
 </head>
 <body class="easyui-layout" style="visibility:hidden;">
@@ -348,9 +404,9 @@
 	</div>
 	
 	<!-- 关联客户窗口 -->
-	<div class="easyui-window" title="关联客户窗口" id="customerWindow" collapsible="false" closed="true" minimizable="false" maximizable="false" style="top:20px;left:200px;width: 400px;height: 300px;">
+	<div class="easyui-window" title="关联客户窗口" modal="true" id="customerWindow" collapsible="false" closed="true" minimizable="false" maximizable="false" style="top:20px;left:200px;width: 400px;height: 300px;">
 		<div style="overflow:auto;padding:5px;" border="false">
-			<form id="customerForm" action="${pageContext.request.contextPath }/decidedzone_assigncustomerstodecidedzone.action" method="post">
+			<form id="customerForm" action="${pageContext.request.contextPath }/decidedzoneAction_assigncustomerstodecidedzone.action" method="post">
 				<table class="table-edit" width="80%" align="center">
 					<tr class="title">
 						<td colspan="3">关联客户</td>
