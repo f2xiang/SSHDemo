@@ -16,4 +16,10 @@ public interface CustomerService {
 
 	// 将未关联定区客户关联到定区上
 	public void assignCustomersToDecidedZone(Integer[] customerIds, String decidedZoneId);
+	
+	//根据手机号查询客户信息
+	public Customer findByPhone(String phonenumber);
+	
+	//根据地址 查询定区的id
+	public String findDecidedzoneByAddress(String address);
 }

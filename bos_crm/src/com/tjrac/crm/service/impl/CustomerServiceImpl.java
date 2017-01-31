@@ -57,4 +57,36 @@ public class CustomerServiceImpl implements CustomerService {
 		session.close();
 	}
 
+	@Override
+	public Customer findByPhone(String phonenumber) {
+		Session session = HibernateUtils.openSession();
+		session.beginTransaction();
+
+		String hql = "from Customer where telephone = ?";
+		List<Customer> customers = session.createQuery(hql).setParameter(0, phonenumber).list();
+
+		session.getTransaction().commit();
+		session.close();
+		if(customers != null && customers.size() > 0){
+			return customers.get(0);
+		}
+		return null;
+	}
+
+	@Override
+	public String findDecidedzoneByAddress(String address) {
+		Session session = HibernateUtils.openSession();
+		session.beginTransaction();
+
+		String hql = "select decidedzone_id from Customer where address = ?";
+		List<String> customers = session.createQuery(hql).setParameter(0, address).list();
+
+		session.getTransaction().commit();
+		session.close();
+		if(customers != null && customers.size() > 0){
+			return customers.get(0);
+		}
+		return null;
+	}
+
 }

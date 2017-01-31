@@ -18,10 +18,12 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.tjrac.bos.domain.Region;
 import com.tjrac.bos.service.DecidedzoneService;
+import com.tjrac.bos.service.NoticebillService;
 import com.tjrac.bos.service.RegionService;
 import com.tjrac.bos.service.StaffService;
 import com.tjrac.bos.service.SubareaService;
 import com.tjrac.bos.service.UserService;
+import com.tjrac.bos.service.WorkordermanageService;
 import com.tjrac.bos.utils.PageBean;
 import com.tjrac.crm.service.CustomerService;
 
@@ -51,6 +53,12 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T>{
 	
 	@Resource
 	protected CustomerService customerService;
+	
+	@Resource
+	protected NoticebillService noticebillService;
+	
+	@Resource
+	protected WorkordermanageService workordermanageService;
 	
 	//-----------分页数据----------
 	protected PageBean pageBean = new PageBean();
@@ -124,5 +132,24 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T>{
 		ServletActionContext.getResponse().setContentType("text/json;charset=UTF-8");
 		ServletActionContext.getResponse().getWriter().print(json);
 		
+	}
+	
+	
+	
+	/**
+	 * 把一个对象转成json
+	 * @param Object
+	 * @param excludes
+	 * @throws IOException
+	 */
+	public void writeObj2Json(Object obj, String [] excludes) throws IOException{
+		JsonConfig jsonConfig = new JsonConfig();
+		jsonConfig.setExcludes(excludes);//设置不包含的数据
+		
+		
+		JSONObject jsonObject = JSONObject.fromObject(obj, jsonConfig);
+		String json = jsonObject.toString();
+		ServletActionContext.getResponse().setContentType("text/json;charset=UTF-8");
+		ServletActionContext.getResponse().getWriter().print(json);
 	}
 }
