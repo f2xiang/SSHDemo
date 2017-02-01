@@ -18,8 +18,10 @@ import com.opensymphony.xwork2.ActionSupport;
 import com.opensymphony.xwork2.ModelDriven;
 import com.tjrac.bos.domain.Region;
 import com.tjrac.bos.service.DecidedzoneService;
+import com.tjrac.bos.service.FunctionService;
 import com.tjrac.bos.service.NoticebillService;
 import com.tjrac.bos.service.RegionService;
+import com.tjrac.bos.service.RoleService;
 import com.tjrac.bos.service.StaffService;
 import com.tjrac.bos.service.SubareaService;
 import com.tjrac.bos.service.UserService;
@@ -59,6 +61,12 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T>{
 	
 	@Resource
 	protected WorkordermanageService workordermanageService;
+	
+	@Resource
+	protected FunctionService functionService;
+	
+	@Resource
+	protected RoleService roleService;
 	
 	//-----------·ÖÒ³Êý¾Ý----------
 	protected PageBean pageBean = new PageBean();

@@ -71,6 +71,16 @@
     	<!-- 工作单录入的action -->
     	<action name="workordermanageAction_*" class="workordermanageAction" method="{1}">
     	</action>
+    	
+    	<!-- 权限管理的action -->
+    	<action name="functionAction_*" class="functionAction" method="{1}">
+    		<result name="list">/WEB-INF/pages/admin/function_add.jsp</result>
+    	</action>
+    	
+    	<!-- 角色管理的action -->
+    	<action name="roleAction_*" class="roleAction" method="{1}">
+    		<result name="list">/WEB-INF/pages/admin/role.jsp</result>
+    	</action>
     </package>
     
     

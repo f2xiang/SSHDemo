@@ -17,13 +17,21 @@ public class Function implements java.io.Serializable {
 	private String code;
 	private String description;
 	private String page;
-	private String generatemenu;
+	private String generatemenu = "1"; //当前权限是否要生成到菜单上  1：生成  0：不生成
 	private Integer zindex;
 	private Set functions = new HashSet(0);
 	private Set roles = new HashSet(0);
 
 	// Constructors
-
+	public String getpId() {
+		if(function == null){  //父节点
+			return "0";
+		}else{
+			return function.getId();
+		}
+	}
+	
+	
 	/** default constructor */
 	public Function() {
 	}

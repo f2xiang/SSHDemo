@@ -51,12 +51,11 @@
 		};
 		
 		$.ajax({
-			url : '${pageContext.request.contextPath}/json/menu.json',
+			url : '${pageContext.request.contextPath}/functionAction_findAll.action',
 			type : 'POST',
-			dataType : 'text',
+			dataType : 'json',
 			success : function(data) {
-				var zNodes = eval("(" + data + ")");
-				$.fn.zTree.init($("#functionTree"), setting, zNodes);
+				$.fn.zTree.init($("#functionTree"), setting, data);
 			},
 			error : function(msg) {
 				alert('树加载异常!');
@@ -67,7 +66,18 @@
 		
 		// 点击保存
 		$('#save').click(function(){
-			location.href='${pageContext.request.contextPath}/page_admin_privilege.action';
+			var v = $("#roleForm").form("validate");
+			if(v){
+				var treeObj = $.fn.zTree.getZTreeObj("functionTree");
+				var nodes = treeObj.getCheckedNodes(true);//在提交表单之前将选中的checkbox收集
+				var array = new Array();
+				for(var i=0;i<nodes.length;i++){
+					array.push(nodes[i].id);
+				}
+				var functionIds = array.join(",");  //把获取的ids数据放到隐藏域里 这样就能跟着表单一起提交了
+				$("input[name=functionIds]").val(functionIds);
+				$("#roleForm").submit();
+			}
 		});
 	});
 </script>	
@@ -79,7 +89,8 @@
 			</div>
 		</div>
 		<div region="center" style="overflow:auto;padding:5px;" border="false">
-			<form id="roleForm" method="post">
+			<form id="roleForm" method="post" action="${pageContext.request.contextPath}/roleAction_add.action">
+				<input type="hidden" name="functionIds">
 				<table class="table-edit" width="80%" align="center">
 					<tr class="title">
 						<td colspan="2">角色信息</td>
