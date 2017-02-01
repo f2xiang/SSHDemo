@@ -6,6 +6,12 @@ import java.util.List;
 import javax.annotation.Resource;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.AuthenticationToken;
+import org.apache.shiro.authc.UnknownAccountException;
+import org.apache.shiro.authc.UsernamePasswordToken;
+import org.apache.shiro.subject.Subject;
 import org.apache.struts2.ServletActionContext;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
@@ -30,13 +36,45 @@ public class UserAction extends BaseAction<User>{
 	}
 	
 	
-	
-	
 	/**
-	 * 登录模块
+	 * 使用shiro提供的方法来进行认证
 	 * @return
 	 */
 	public String login(){
+		//判断验证码是否正确
+		String checkcode2 = (String) ServletActionContext.getRequest().getSession().getAttribute("key");
+		if(StringUtils.isNotBlank(checkcode) && checkcode.equalsIgnoreCase(checkcode2)){
+			//验证码正确
+			//获得当前的用户对象
+			Subject subject = SecurityUtils.getSubject();  //未认证状态
+			AuthenticationToken token = new UsernamePasswordToken(model.getUsername(), MyMd5Util.getMD5Value(model.getPassword()));
+			try {
+				subject.login(token );
+			} catch (UnknownAccountException e) {
+				//设置错误信息
+				this.addFieldError("", "用户名不存在");
+				return "login";
+			} catch (Exception e) {
+				this.addFieldError("", "用户名或密码不正确");
+				return "login";
+			}
+			//认证通过  获取认证信息对象中 的user
+			User user =	(User) subject.getPrincipal();
+			ServletActionContext.getRequest().getSession().setAttribute("user", user);
+			return "loginsuccess";
+		}else{
+			this.addFieldError("", "验证码不正确");
+			return "login";
+		}
+		
+	}
+	
+	
+	/**
+	 * 登录模块--采用shiro的方法来代替
+	 * @return
+	 */
+	public String login2(){
 		//判断验证码是否正确
 		String checkcode2 = (String) ServletActionContext.getRequest().getSession().getAttribute("key");
 		if(StringUtils.isNotBlank(checkcode) && checkcode.equalsIgnoreCase(checkcode2)){

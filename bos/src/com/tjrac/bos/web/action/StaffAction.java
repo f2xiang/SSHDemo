@@ -4,6 +4,8 @@ import java.io.IOException;
 import java.util.List;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.hibernate.criterion.DetachedCriteria;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.context.annotation.Scope;
@@ -74,6 +76,8 @@ public class StaffAction extends BaseAction<Staff>{
 	 * 批量删除
 	 * @return
 	 */
+	@RequiresPermissions(value="staff")  //权限限制：staff
+					        	//@RequiresRoles(value="staff")    //角色限制：staff
 	public String delete(){
 		this.staffService.deleteBatch(ids);
 		return "list";

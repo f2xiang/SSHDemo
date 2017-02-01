@@ -52,5 +52,6 @@
 	<classpathentry kind="con" path="org.eclipse.jdt.junit.JUNIT_CONTAINER/4"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/pinyin4j-2.5.0.jar"/>
 	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/hessian-4.0.33.jar"/>
+	<classpathentry kind="lib" path="WebRoot/WEB-INF/lib/shiro-all-1.2.2.jar" sourcepath="F:/开源项目/shiro使用方法/shiro-root-1.2.2-source-release.zip"/>
 	<classpathentry kind="output" path="WebRoot/WEB-INF/classes"/>
 </classpath>

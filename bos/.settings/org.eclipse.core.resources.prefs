@@ -1,8 +1,10 @@
-#Tue Jan 31 10:19:25 CST 2017
+#Tue Jan 31 19:34:47 CST 2017
 eclipse.preferences.version=1
 encoding//src/com/tjrac/bos/domain/Decidedzone.java=UTF-8
+encoding//src/com/tjrac/bos/domain/Function.java=UTF-8
 encoding//src/com/tjrac/bos/domain/Noticebill.java=UTF-8
 encoding//src/com/tjrac/bos/domain/Region.java=UTF-8
+encoding//src/com/tjrac/bos/domain/Role.java=UTF-8
 encoding//src/com/tjrac/bos/domain/Staff.java=UTF-8
 encoding//src/com/tjrac/bos/domain/Subarea.java=UTF-8
 encoding//src/com/tjrac/bos/domain/Workbill.java=UTF-8

@@ -2,6 +2,8 @@ package com.tjrac.bos.domain;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
 
 public class User implements Serializable{
 	private Integer id;
@@ -22,7 +24,9 @@ public class User implements Serializable{
 	
 	private String remark;
 	
+	private Set<Noticebill> noticebills = new HashSet<Noticebill>();
 	
+	private Set<Role> roles = new HashSet<Role>();
 	
 
 	public Integer getId() {
@@ -95,6 +99,22 @@ public class User implements Serializable{
 
 	public void setRemark(String remark) {
 		this.remark = remark;
+	}
+
+	public Set<Noticebill> getNoticebills() {
+		return noticebills;
+	}
+
+	public void setNoticebills(Set<Noticebill> noticebills) {
+		this.noticebills = noticebills;
+	}
+
+	public Set<Role> getRoles() {
+		return roles;
+	}
+
+	public void setRoles(Set<Role> roles) {
+		this.roles = roles;
 	}
 	
 	

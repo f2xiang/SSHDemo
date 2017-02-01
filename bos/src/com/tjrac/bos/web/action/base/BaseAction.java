@@ -82,7 +82,15 @@ public class BaseAction<T> extends ActionSupport implements ModelDriven<T>{
 	}
 	
 	public BaseAction(){
-		ParameterizedType parameterizedType =	(ParameterizedType) this.getClass().getGenericSuperclass();
+		ParameterizedType parameterizedType =null;	
+		
+		if(this.getClass().getGenericSuperclass() instanceof ParameterizedType){
+			parameterizedType = (ParameterizedType) this.getClass().getGenericSuperclass();
+		}else{//action创建了代理的时候--多往上面找一层
+			parameterizedType = (ParameterizedType) this.getClass().getSuperclass().getGenericSuperclass();
+		}
+		
+		
 		Type[] actualTypeArguments = parameterizedType.getActualTypeArguments();
 		//获得实体的类型
 		Class<T> entity = (Class<T>) actualTypeArguments[0];

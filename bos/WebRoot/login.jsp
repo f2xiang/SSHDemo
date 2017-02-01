@@ -61,7 +61,7 @@ input[type=password] {
 			</div>
 			<div class="loginForm">
 				<form id="loginform" name="loginform" method="post" class="niceform"
-					action="${pageContext.request.contextPath}/userAction_login">
+					action="${pageContext.request.contextPath}/userAction_login.action">
 				<center><font color="red"> <s:fielderror></s:fielderror> </font></center>		
 					<div id="idInputLine" class="loginFormIpt showPlaceholder"
 						style="margin-top: 5px;">
