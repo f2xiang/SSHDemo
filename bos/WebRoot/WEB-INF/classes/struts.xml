@@ -41,6 +41,7 @@
     	<!-- 用户的action -->
     	<action name="userAction_*" class="userAction" method="{1}">
     		<result name="loginsuccess">/WEB-INF/pages/common/index.jsp</result>
+    		<result name="list">/WEB-INF/pages/admin/userlist.jsp</result>
     	</action>
     	
     	<!-- 取派员的action -->

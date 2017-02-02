@@ -125,4 +125,38 @@ public class UserAction extends BaseAction<User>{
 		
 		return NONE;
 	}
+	
+	
+	
+	/**
+	 * 分页查询 ajax
+	 * @return
+	 * @throws IOException 
+	 */
+	public String pageQuery() throws IOException{
+		this.userService.pageQuery(pageBean);
+		this.writePageBean2Json(pageBean, new String[]{"currentPage", "detachedCriteria", "pageSize", "noticebills", "roles" });
+		return NONE;
+	}
+	
+	
+	
+	//接收角色的id
+	private String[] roleIds;
+	
+	public void setRoleIds(String[] roleIds) {
+		this.roleIds = roleIds;
+	}
+	
+	
+	
+	/**
+	 * 添加用户
+	 * @return
+	 */
+	public String add(){
+		this.userService.save(model, roleIds);
+		return "list";
+	}
+	
 }

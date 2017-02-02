@@ -1,6 +1,7 @@
 package com.tjrac.bos.domain;
 
 import java.io.Serializable;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
@@ -29,6 +30,23 @@ public class User implements Serializable{
 	private Set<Role> roles = new HashSet<Role>();
 	
 
+	public String getRoleNames(){
+		String names = "";
+		for (Role role : roles) {
+			names += role.getName() + " ";
+		}
+		return names;
+	}
+	
+	
+	public String getFormatbirthday(){
+		if(birthday != null){
+			return new SimpleDateFormat("yyyy-MM-dd").format(birthday);
+		}else{
+			return "未提交生日";
+		}
+	}
+	
 	public Integer getId() {
 		return id;
 	}
